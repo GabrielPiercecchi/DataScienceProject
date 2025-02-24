@@ -19,6 +19,7 @@ STCC/pokemon.csv
 STCC/piccia_class.ipynb
 STCC/crime_map.html
 CHATBOT/laptops.csv
+CHATBOT/laptops_etl.csv
 .env
 
 ## Ignore Visual Studio temporary files, build results, and
