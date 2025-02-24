@@ -6,7 +6,8 @@ Progetto di Data Science
 Su Win 11:
 - creare env: *python3.10 -m venv ./venv*
 - accedere all'env: *sudo .\venv\Scripts\activate*
-- istallare rasa: 
+  - **Se non funziona apire CMD ed eseguire questo comando**: *.\\.venv\Scripts\activate.bat*
+- installare rasa: 
   - *pip install uv* 
   - *uv pip install rasa* 
   - **Seguire la documentazione di rasa per ottenere la chiave per Rasa Pro**
