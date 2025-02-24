@@ -7,6 +7,7 @@ Su Win 11:
 - creare env: *python3.10 -m venv ./venv*
 - accedere all'env: *sudo .\venv\Scripts\activate*
   - **Se non funziona apire CMD ed eseguire questo comando**: *.\\.venv\Scripts\activate.bat*
+  - Altrimenti eseguire: *Set-ExecutionPolicy Bypass -Scope Process* e poi *.\\.venv\Scripts\Activate.ps1*
 - installare rasa: 
   - *pip install uv* 
   - *uv pip install rasa* 
