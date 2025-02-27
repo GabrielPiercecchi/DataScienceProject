@@ -1,33 +1,151 @@
 version: "3.1"
 
 intents:
-  - greet
-  - goodbye
+  - saluto
+  - start
+  - help
+  - ringraziamento
   - affirm
   - deny
-  - mood_great
-  - mood_unhappy
-  - bot_challenge
+  - addio
+  - out_of_scope
+  - cerca_laptop
+  - confronto_laptop
+  - caratteristiche_laptop
+  - prezzo_laptop
+  - consiglia_laptop
+  - filtra_laptop
+  - dettagli_laptop
+
+entities:
+  - laptop
+  - brand
+  - processor
+  - ram
+  - os
+  - storage
+  - display
+  - price_range
+  - usage
+
+slots:
+  laptop:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: laptop
+
+  brand:
+    type: categorical
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: brand
+
+  processor:
+    type: categorical
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: processor
+
+  ram:
+    type: categorical
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: ram
+
+  os:
+    type: categorical
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: os
+
+  storage:
+    type: categorical
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: storage
+
+  display:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: display
+
+  price_range:
+    type: float
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: price_range
+
+  usage:
+    type: categorical
+    values:
+      - gaming
+      - lavoro
+      - programmazione
+      - editing video
+      - studenti
+      - uso quotidiano
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: usage
 
 responses:
-  utter_greet:
-  - text: "Hey! How are you?"
+  utter_saluto:
+    - text: "Ciao! Sono qui per aiutarti a trovare il laptop perfetto. Dimmi pure cosa cerchi."
+    - text: "Salve! Posso aiutarti a trovare il portatile ideale per le tue esigenze."
+  utter_ringraziamento:
+    - text: "Prego! Se hai altre domande, sono qui per aiutarti."
+    - text: "Di nulla! Sono sempre disponibile per ulteriori informazioni."
+  utter_addio:
+    - text: "Arrivederci! Buona giornata e buona ricerca."
+    - text: "Addio, spero di esserti stato utile. A presto!"
+  utter_ask_brand:
+    - text: "Hai in mente un brand specifico oppure posso suggerirti alcune opzioni?"
+  utter_ask_processor:
+    - text: "Preferisci un laptop con processore Intel, AMD oppure hai altre preferenze?"
+  utter_ask_ram:
+    - text: "Quanta RAM ti serve? Ti interessa almeno 8GB o cerchi qualcosa di superiore?"
+  utter_ask_os:
+    - text: "Hai una preferenza per il sistema operativo (Windows, macOS, Linux)?"
+  utter_ask_storage:
+    - text: "Che tipo di storage preferisci? SSD, HDD oppure una combinazione di entrambi?"
+  utter_ask_display:
+    - text: "Quale dimensione dello schermo preferisci? Per esempio, [15.6 pollici](display) o [14 pollici](display)?"
+  utter_ask_price_range:
+    - text: "Qual è il tuo budget? Indica un intervallo di prezzo in EUR, per favore."
+  utter_help:
+    - text: "Posso aiutarti a trovare, confrontare e fornirti dettagli sui laptop. Dimmi cosa ti interessa!"
+  utter_informazioni_generali:
+    - text: "Questo chatbot ti aiuta a scegliere il laptop ideale in base alle tue esigenze, filtrando per specifiche tecniche, prezzo e molto altro. Chiedimi pure cosa cerchi!"
 
-  utter_cheer_up:
-  - text: "Here is something to cheer you up:"
-    image: "https://i.imgur.com/nGF1K8f.jpg"
+actions:
+  - action_suggerisci_laptop
+  - action_confronta_laptop
+  - action_caratteristiche_laptop
+  - action_prezzo_laptop
+  - action_help
+  - action_show_laptop_list
 
-  utter_did_that_help:
-  - text: "Did that help you?"
-
-  utter_happy:
-  - text: "Great, carry on!"
-
-  utter_goodbye:
-  - text: "Bye"
-
-  utter_iamabot:
-  - text: "I am a bot, powered by Rasa."
+forms:
+  laptop_form:
+    required_slots:
+      - brand
+      - processor
+      - ram
+      - os
+      - storage
+      - display
+      - price_range
 
 session_config:
   session_expiration_time: 60

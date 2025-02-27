@@ -1,13 +1,62 @@
 version: "3.1"
 
 rules:
-
-- rule: Say goodbye anytime the user says goodbye
+- rule: Rispondi ai saluti
   steps:
-  - intent: goodbye
-  - action: utter_goodbye
+    - intent: saluto
+    - action: utter_saluto
 
-- rule: Say 'I am a bot' anytime the user challenges
+- rule: Gestisci l'inizio della conversazione
   steps:
-  - intent: bot_challenge
-  - action: utter_iamabot
+    - intent: start
+    - action: utter_saluto
+
+- rule: Rispondi ai ringraziamenti
+  steps:
+    - intent: ringraziamento
+    - action: utter_ringraziamento
+
+- rule: Gestisci l'addio
+  steps:
+    - intent: addio
+    - action: utter_addio
+
+- rule: Fornisci aiuto
+  steps:
+    - intent: help
+    - action: utter_help
+
+- rule: Rispondi alle informazioni generali
+  steps:
+    - intent: informazione_generale
+    - action: utter_informazioni_generali
+
+- rule: Gestisci la richiesta di confronto laptop
+  steps:
+    - intent: confronto_laptop
+    - action: action_confronta_laptop
+
+- rule: Gestisci la richiesta di caratteristiche del laptop
+  steps:
+    - intent: caratteristiche_laptop
+    - action: action_caratteristiche_laptop
+
+- rule: Gestisci la richiesta di prezzo del laptop
+  steps:
+    - intent: prezzo_laptop
+    - action: action_prezzo_laptop
+
+- rule: Gestisci la richiesta di consigli per il laptop
+  steps:
+    - intent: consiglia_laptop
+    - action: action_suggerisci_laptop
+
+- rule: Gestisci il filtraggio dei laptop
+  steps:
+    - intent: filtra_laptop
+    - action: action_suggerisci_laptop
+
+- rule: Gestisci la richiesta di dettagli completi sul laptop
+  steps:
+    - intent: dettagli_laptop
+    - action: action_caratteristiche_laptop

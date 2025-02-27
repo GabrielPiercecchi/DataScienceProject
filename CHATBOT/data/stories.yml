@@ -1,30 +1,70 @@
 version: "3.1"
 
 stories:
-
-- story: happy path
+- story: Saluto e ricerca laptop con form (gaming)
   steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: mood_great
-  - action: utter_happy
+    - intent: saluto
+    - action: utter_saluto
+    - intent: cerca_laptop
+      entities:
+        - usage: gaming
+    - action: laptop_form
+    - active_loop: laptop_form
+    - action: action_suggerisci_laptop
 
-- story: sad path 1
+- story: Ricerca laptop per lavoro e studio con form
   steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: mood_unhappy
-  - action: utter_cheer_up
-  - action: utter_did_that_help
-  - intent: affirm
-  - action: utter_happy
+    - intent: cerca_laptop
+      entities:
+        - usage: lavoro
+    - action: laptop_form
+    - active_loop: laptop_form
+    - action: action_suggerisci_laptop
 
-- story: sad path 2
+- story: Ricerca laptop per editing video
   steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: mood_unhappy
-  - action: utter_cheer_up
-  - action: utter_did_that_help
-  - intent: deny
-  - action: utter_goodbye
+    - intent: cerca_laptop
+      entities:
+        - usage: editing video
+    - action: laptop_form
+    - active_loop: laptop_form
+    - action: action_suggerisci_laptop
+
+- story: Filtraggio dettagliato per specifiche
+  steps:
+    - intent: filtra_laptop
+    - action: action_suggerisci_laptop
+
+- story: Confronto tra due laptop
+  steps:
+    - intent: confronto_laptop
+    - action: action_confronta_laptop
+
+- story: Richiesta di caratteristiche tecniche
+  steps:
+    - intent: caratteristiche_laptop
+    - action: action_caratteristiche_laptop
+
+- story: Richiesta di prezzo
+  steps:
+    - intent: prezzo_laptop
+    - action: action_prezzo_laptop
+
+- story: Richiesta di consigli per laptop
+  steps:
+    - intent: consiglia_laptop
+    - action: action_suggerisci_laptop
+
+- story: Richiesta di aiuto
+  steps:
+    - intent: help
+    - action: utter_help
+
+- story: Saluto, ringraziamento e addio
+  steps:
+    - intent: saluto
+    - action: utter_saluto
+    - intent: ringraziamento
+    - action: utter_ringraziamento
+    - intent: addio
+    - action: utter_addio
