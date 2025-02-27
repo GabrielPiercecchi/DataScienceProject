@@ -20,6 +20,8 @@ STCC/piccia_class.ipynb
 STCC/crime_map.html
 CHATBOT/laptops.csv
 CHATBOT/laptops_etl.csv
+CHATBOT/laptops_etl_clean.csv
+CHATBOT/laptops_cleaned.csv
 .env
 
 ## Ignore Visual Studio temporary files, build results, and
@@ -633,3 +635,5 @@ Untitled*.ipynb
 tests/data/stanza
 .vscode
 .rasa
+story_graph.dot
+models
