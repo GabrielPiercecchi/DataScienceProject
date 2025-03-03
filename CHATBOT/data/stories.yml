@@ -4,13 +4,14 @@ stories:
 - story: Saluto e ricerca laptop con form (gaming)
   steps:
     - intent: saluto
-    - action: utter_saluto
+    - action: utter_greet
     - intent: cerca_laptop
       entities:
         - usage: gaming
     - action: laptop_form
     - active_loop: laptop_form
     - action: action_suggerisci_laptop
+    - action: action_reset_slots
 
 - story: Ricerca laptop per lavoro e studio con form
   steps:
@@ -20,6 +21,7 @@ stories:
     - action: laptop_form
     - active_loop: laptop_form
     - action: action_suggerisci_laptop
+    - action: action_reset_slots
 
 - story: Ricerca laptop per editing video
   steps:
@@ -29,31 +31,37 @@ stories:
     - action: laptop_form
     - active_loop: laptop_form
     - action: action_suggerisci_laptop
+    - action: action_reset_slots
 
 - story: Filtraggio dettagliato per specifiche
   steps:
     - intent: filtra_laptop
     - action: action_suggerisci_laptop
+    - action: action_reset_slots
 
 - story: Confronto tra due laptop
   steps:
     - intent: confronto_laptop
     - action: action_confronta_laptop
+    - action: action_reset_slots
 
 - story: Richiesta di caratteristiche tecniche
   steps:
     - intent: caratteristiche_laptop
     - action: action_caratteristiche_laptop
+    - action: action_reset_slots
 
 - story: Richiesta di prezzo
   steps:
     - intent: prezzo_laptop
     - action: action_prezzo_laptop
+    - action: action_reset_slots
 
 - story: Richiesta di consigli per laptop
   steps:
     - intent: consiglia_laptop
     - action: action_suggerisci_laptop
+    - action: action_reset_slots
 
 - story: Richiesta di aiuto
   steps:
@@ -63,16 +71,18 @@ stories:
 - story: Saluto, ringraziamento e addio
   steps:
     - intent: saluto
-    - action: utter_saluto
+    - action: utter_greet
     - intent: ringraziamento
     - action: utter_ringraziamento
     - intent: addio
     - action: utter_addio
+    - action: action_reset_slots
 
 - story: Mostra immagine del laptop
   steps:
     - intent: mostra_immagine
     - action: action_mostra_immagine_laptop
+    - action: action_reset_slots
 
 - story: Ricerca laptop con range di rating
   steps:
@@ -80,6 +90,7 @@ stories:
     - action: laptop_form
     - active_loop: laptop_form
     - action: action_suggerisci_laptop
+    - action: action_reset_slots
 
 - story: Ricerca laptop con filtro prezzo e limit
   steps:
@@ -91,6 +102,7 @@ stories:
     - action: laptop_form
     - active_loop: laptop_form
     - action: action_suggerisci_laptop
+    - action: action_reset_slots
 
 - story: Ricerca laptop per uso specifico e prezzo superiore
   steps:
@@ -102,8 +114,9 @@ stories:
     - action: laptop_form
     - active_loop: laptop_form
     - action: action_suggerisci_laptop
+    - action: action_reset_slots
 
-- story: Reset degli slot
+- story: Reset degli slot (manuale)
   steps:
     - intent: reset_slots
     - action: action_reset_slots

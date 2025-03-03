@@ -4,12 +4,12 @@ rules:
 - rule: Rispondi ai saluti
   steps:
     - intent: saluto
-    - action: utter_saluto
+    - action: utter_greet
 
 - rule: Gestisci l'inizio della conversazione
   steps:
     - intent: start
-    - action: utter_saluto
+    - action: utter_greet
 
 - rule: Rispondi ai ringraziamenti
   steps:
@@ -20,6 +20,7 @@ rules:
   steps:
     - intent: addio
     - action: utter_addio
+    - action: action_reset_slots
 
 - rule: Fornisci aiuto
   steps:
@@ -35,36 +36,43 @@ rules:
   steps:
     - intent: confronto_laptop
     - action: action_confronta_laptop
+    - action: action_reset_slots
 
 - rule: Gestisci la richiesta di caratteristiche del laptop
   steps:
     - intent: caratteristiche_laptop
     - action: action_caratteristiche_laptop
+    - action: action_reset_slots
 
 - rule: Gestisci la richiesta di prezzo del laptop
   steps:
     - intent: prezzo_laptop
     - action: action_prezzo_laptop
+    - action: action_reset_slots
 
 - rule: Gestisci la richiesta di consigli per il laptop
   steps:
     - intent: consiglia_laptop
     - action: action_suggerisci_laptop
+    - action: action_reset_slots
 
 - rule: Gestisci il filtraggio dei laptop
   steps:
     - intent: filtra_laptop
     - action: action_suggerisci_laptop
+    - action: action_reset_slots
 
 - rule: Gestisci la richiesta di dettagli completi sul laptop
   steps:
     - intent: dettagli_laptop
     - action: action_caratteristiche_laptop
+    - action: action_reset_slots
 
 - rule: Gestisci richiesta di mostrare immagine
   steps:
     - intent: mostra_immagine
     - action: action_mostra_immagine_laptop
+    - action: action_reset_slots
 
 - rule: Gestisci richiesta con range di rating
   condition:
@@ -72,3 +80,4 @@ rules:
   steps:
     - intent: cerca_laptop
     - action: action_suggerisci_laptop
+    - action: action_reset_slots

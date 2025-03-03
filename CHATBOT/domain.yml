@@ -110,7 +110,7 @@ slots:
       - type: from_entity
         entity: rating_range
 
-  price_condition:          # Nuovo slot per specificare "inferiore" o "superiore"
+  price_condition:
     type: categorical
     values:
       - inferiore
@@ -120,7 +120,7 @@ slots:
       - type: from_entity
         entity: price_condition
 
-  limit:                    # Nuovo slot per limitare il numero di risultati
+  limit:
     type: float
     influence_conversation: true
     mappings:
@@ -128,6 +128,18 @@ slots:
         entity: limit
 
 responses:
+  utter_greet:
+    - text: |
+        👋 Benvenuto! Ecco alcune cose che puoi fare con questo bot:
+        
+        💻 **Laptop:**
+        1️⃣ Confronta due laptop per trovare il migliore.
+        2️⃣ Cerca un laptop in base a specifiche tecniche (processor, RAM, storage, display, prezzo, ecc.).
+        3️⃣ Richiedi dettagli e specifiche tecniche di un laptop.
+        4️⃣ Visualizza l'immagine di un laptop.
+        5️⃣ Scopri il prezzo e confronta le opzioni.
+        
+        ❓ Se hai bisogno di aiuto, scrivi "help".
   utter_saluto:
     - text: "Ciao! Sono qui per aiutarti a trovare il laptop perfetto. Dimmi pure cosa cerchi."
     - text: "Salve! Posso aiutarti a trovare il portatile ideale per le tue esigenze."
@@ -148,7 +160,7 @@ responses:
   utter_ask_storage:
     - text: "Che tipo di storage preferisci? SSD, HDD oppure una combinazione di entrambi?"
   utter_ask_display:
-    - text: "Quale dimensione dello schermo preferisci? Per esempio, [15.6 pollici](display) o [14 pollici](display)?"
+    - text: "Quale dimensione dello schermo preferisci? Per esempio, 15.6 pollici o 14 pollici?"
   utter_ask_price_range:
     - text: "Qual è il tuo budget? Indica un intervallo di prezzo in EUR, per favore."
   utter_help:
