@@ -20,6 +20,8 @@ intents:
 
 entities:
   - laptop
+  - laptop1
+  - laptop2
   - brand
   - processor
   - ram
@@ -39,6 +41,20 @@ slots:
     mappings:
       - type: from_entity
         entity: laptop
+  
+  laptop1:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: laptop1
+
+  laptop2:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: laptop2
 
   brand:
     type: categorical
@@ -179,17 +195,6 @@ actions:
   - action_show_laptop_list
   - action_mostra_immagine_laptop
   - action_reset_slots
-
-forms:
-  laptop_form:
-    required_slots:
-      - brand
-      - processor
-      - ram
-      - os
-      - storage
-      - display
-      - price_range
 
 session_config:
   session_expiration_time: 60

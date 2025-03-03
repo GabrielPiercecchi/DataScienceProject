@@ -8,8 +8,6 @@ stories:
     - intent: cerca_laptop
       entities:
         - usage: gaming
-    - action: laptop_form
-    - active_loop: laptop_form
     - action: action_suggerisci_laptop
     - action: action_reset_slots
 
@@ -18,8 +16,6 @@ stories:
     - intent: cerca_laptop
       entities:
         - usage: lavoro
-    - action: laptop_form
-    - active_loop: laptop_form
     - action: action_suggerisci_laptop
     - action: action_reset_slots
 
@@ -28,8 +24,6 @@ stories:
     - intent: cerca_laptop
       entities:
         - usage: editing video
-    - action: laptop_form
-    - active_loop: laptop_form
     - action: action_suggerisci_laptop
     - action: action_reset_slots
 
@@ -87,8 +81,6 @@ stories:
 - story: Ricerca laptop con range di rating
   steps:
     - intent: cerca_laptop
-    - action: laptop_form
-    - active_loop: laptop_form
     - action: action_suggerisci_laptop
     - action: action_reset_slots
 
@@ -99,8 +91,6 @@ stories:
         - price_range: "800"
         - price_condition: "inferiore"
         - limit: "1"
-    - action: laptop_form
-    - active_loop: laptop_form
     - action: action_suggerisci_laptop
     - action: action_reset_slots
 
@@ -111,8 +101,6 @@ stories:
         - usage: "lavoro"
         - price_range: "1200"
         - price_condition: "superiore"
-    - action: laptop_form
-    - active_loop: laptop_form
     - action: action_suggerisci_laptop
     - action: action_reset_slots
 

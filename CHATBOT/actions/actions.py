@@ -223,11 +223,11 @@ class ActionConfrontaLaptop(Action):
         laptop1_input = tracker.get_slot("laptop1")
         laptop2_input = tracker.get_slot("laptop2")
         logger.debug(f"Richiesta confronto tra: {laptop1_input} e {laptop2_input}")
-        
+
         if not laptop1_input or not laptop2_input:
             dispatcher.utter_message(text="Per favore, specifica i nomi di entrambi i laptop da confrontare.")
             return []
-        
+
         matches1 = df[df["name"].str.contains(laptop1_input, case=False, na=False)]
         if matches1.empty:
             dispatcher.utter_message(text=f"Non sono riuscito a trovare un laptop che corrisponda a '{laptop1_input}'.")
@@ -254,9 +254,11 @@ class ActionConfrontaLaptop(Action):
 
         data1 = matches1.iloc[0]
         data2 = matches2.iloc[0]
-        response = f"Confronto dettagliato tra **{data1['name']}** e **{data2['name']}**:\n\n"
-        response += f"### {data1['name']}\n{format_laptop_details(data1)}\n\n"
-        response += f"### {data2['name']}\n{format_laptop_details(data2)}\n"
+        response = (
+            f"Confronto dettagliato tra **{data1['name']}** e **{data2['name']}**:\n\n"
+            f"### {data1['name']}\n{format_laptop_details(data1)}\n\n"
+            f"### {data2['name']}\n{format_laptop_details(data2)}\n"
+        )
         dispatcher.utter_message(text=response)
         return []
 

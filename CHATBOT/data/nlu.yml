@@ -136,46 +136,46 @@ nlu:
 
 - intent: cerca_laptop
   examples: |
-    - Cerco un laptop per [lavoro](usage) con [64 bit Windows 11 Operating System](os) e [1 TB HDD|256 GB SSD](storage) a un prezzo sotto [800 EUR](price_range) [inferiore](price_condition).
-    - Cerco un laptop per [lavoro](usage) con [32 bit Windows 11 Operating System](os) e [1 TB HDD|256 GB SSD](storage) a un prezzo sotto [800 EUR](price_range) [inferiore](price_condition).
-    - Cerco un laptop per [lavoro](usage) con [Windows 11 Operating System](os) e [1 TB HDD|256 GB SSD](storage) a un prezzo sotto [800 EUR](price_range) [inferiore](price_condition).
+    - Cerco un laptop per [lavoro](usage) con [64 bit Windows 11 Operating System](os) e [1 TB HDD|256 GB SSD](storage) a un prezzo sotto [800](price_range) EUR [inferiore](price_condition).
+    - Cerco un laptop per [lavoro](usage) con [32 bit Windows 11 Operating System](os) e [1 TB HDD|256 GB SSD](storage) a un prezzo sotto [800](price_range) EUR [inferiore](price_condition).
+    - Cerco un laptop per [lavoro](usage) con [Windows 11 Operating System](os) e [1 TB HDD|256 GB SSD](storage) a un prezzo sotto [800](price_range) EUR [inferiore](price_condition).
     - Cerco un laptop per [gaming](usage) con [Intel Core i7 Processor (11th Gen)](processor) e almeno [16 GB DDR4 RAM](ram).
-    - Voglio un notebook con prezzo [700 EUR](price_range) [inferiore](price_condition).
-    - Mi serve un portatile con prezzo [1000 EUR](price_range) [superiore](price_condition) per avere più potenza.
-    - Mostrami solo [1](limit) laptop economico, sotto [500 EUR](price_range) [inferiore](price_condition).
-    - Cerco un laptop per [lavoro](usage) con [Windows 11 Operating System](os) e [256 GB SSD](storage) a un prezzo sotto [800 EUR](price_range) [inferiore](price_condition).
+    - Voglio un notebook con prezzo [700](price_range) EUR [inferiore](price_condition).
+    - Mi serve un portatile con prezzo [1000](price_range) EUR [superiore](price_condition) per avere più potenza.
+    - Mostrami solo [1](limit) laptop economico, sotto [500](price_range) EUR [inferiore](price_condition).
+    - Cerco un laptop per [lavoro](usage) con [Windows 11 Operating System](os) e [256 GB SSD](storage) a un prezzo sotto [800](price_range) EUR [inferiore](price_condition).
     - Cerco un laptop per [gaming](usage) con [Intel Core i7 Processor (11th Gen)](processor) e almeno [16 GB DDR4 RAM](ram).
-    - Vorrei un notebook con prezzo [900 EUR](price_range) [inferiore](price_condition) che offra ottime prestazioni.
-    - Cerco un portatile con prezzo [1200 EUR](price_range) [superiore](price_condition) per attività intensive.
-    - Mostrami solo [2](limit) laptop con prezzo [500 EUR](price_range) [inferiore](price_condition) e buon rapporto qualità-prezzo.
-    - Desidero un laptop per [editing video](usage) con prezzo [1500 EUR](price_range) [superiore](price_condition) per avere prestazioni al top.
-    - Cerco un computer portatile con prezzo [600 EUR](price_range) [inferiore](price_condition) e ottima durata della batteria.
-    - Ho bisogno di un notebook con prezzo [800 EUR](price_range) [inferiore](price_condition) per uso quotidiano.
-    - Vorrei un laptop per [programmazione](usage) con prezzo [1100 EUR](price_range) [superiore](price_condition) per ottenere più memoria e potenza.
-    - Mostrami solo [1](limit) notebook con prezzo [750 EUR](price_range) [inferiore](price_condition) e design elegante.
-    - Cerco un portatile per [lavoro](usage) con prezzo [650 EUR](price_range) [inferiore](price_condition) e prestazioni affidabili.
-    - Vorrei un laptop con prezzo [950 EUR](price_range) [superiore](price_condition) per attività di grafica avanzata.
-    - Mi serve un notebook con prezzo [550 EUR](price_range) [inferiore](price_condition) per uso quotidiano, mostra solo [1](limit) risultato.
-    - Cerco un laptop per [studenti](usage) con prezzo [700 EUR](price_range) [inferiore](price_condition) e costi contenuti.
-    - Voglio un computer portatile con prezzo [1300 EUR](price_range) [superiore](price_condition) per gaming di alta qualità.
+    - Vorrei un notebook con prezzo [900](price_range) EUR [inferiore](price_condition) che offra ottime prestazioni.
+    - Cerco un portatile con prezzo [1200](price_range) EUR [superiore](price_condition) per attività intensive.
+    - Mostrami solo [2](limit) laptop con prezzo [500](price_range) EUR [inferiore](price_condition) e buon rapporto qualità-prezzo.
+    - Desidero un laptop per [editing video](usage) con prezzo [1500](price_range) EUR [superiore](price_condition) per avere prestazioni al top.
+    - Cerco un computer portatile con prezzo [600](price_range) EUR [inferiore](price_condition) e ottima durata della batteria.
+    - Ho bisogno di un notebook con prezzo [800](price_range) EUR [inferiore](price_condition) per uso quotidiano.
+    - Vorrei un laptop per [programmazione](usage) con prezzo [1100](price_range) EUR [superiore](price_condition) per ottenere più memoria e potenza.
+    - Mostrami solo [1](limit) notebook con prezzo [750](price_range) EUR [inferiore](price_condition) e design elegante.
+    - Cerco un portatile per [lavoro](usage) con prezzo [650](price_range) EUR [inferiore](price_condition) e prestazioni affidabili.
+    - Vorrei un laptop con prezzo [950](price_range) EUR [superiore](price_condition) per attività di grafica avanzata.
+    - Mi serve un notebook con prezzo [550](price_range) EUR [inferiore](price_condition) per uso quotidiano, mostra solo [1](limit) risultato.
+    - Cerco un laptop per [studenti](usage) con prezzo [700](price_range) EUR [inferiore](price_condition) e costi contenuti.
+    - Voglio un computer portatile con prezzo [1300](price_range) EUR [superiore](price_condition) per gaming di alta qualità.
     - Mi serve un portatile con [AMD Ryzen 5 Hexa Core Processor](processor) e [16 GB DDR4 RAM](ram) per uso quotidiano.
     - Voglio un notebook per [lavoro](usage) con [Windows 11 Operating System](os) e [256 GB SSD](storage).
-    - Cerco un laptop economico, preferibilmente sotto [500 EUR](price_range).
+    - Cerco un laptop economico, preferibilmente sotto [500](price_range) EUR.
     - Mi consigli un laptop con [Apple M1 Processor](processor) e [8 GB DDR4 RAM](ram)?
     - Voglio un portatile con [512 GB SSD](storage) e uno schermo da [15.6 pollici](display).
     - Cerco un laptop con [AMD Ryzen 7 Octa Core Processor](processor) e almeno [32 GB LPDDR5 RAM](ram).
     - Ho bisogno di un portatile versatile per [lavoro e studio](usage) con [Intel Core i5 Processor (11th Gen)](processor), [8 GB DDR4 RAM](ram) e [256 GB SSD](storage).
     - Cerco un notebook per [multitasking](usage) con [Intel Core i7 Processor (12th Gen)](processor) e [16 GB DDR4 RAM](ram), con display da [15.6 pollici](display).
     - Mi serve un portatile per [editing video](usage) con [AMD Ryzen 9 Octa Core Processor](processor) e [32 GB DDR4 RAM](ram).
-    - Voglio un laptop leggero per [mobilità](usage) con [Intel Core i3 Processor (11th Gen)](processor) e [8 GB DDR4 RAM](ram) a un prezzo inferiore a [600 EUR](price_range).
+    - Voglio un laptop leggero per [mobilità](usage) con [Intel Core i3 Processor (11th Gen)](processor) e [8 GB DDR4 RAM](ram) a un prezzo inferiore a [600](price_range) EUR.
     - Cerco un notebook per [gaming](usage) con [Intel Core i5 Processor (10th Gen)](processor) e [16 GB DDR4 RAM](ram).
     - Ho bisogno di un portatile per [programmazione intensiva](usage) con [Intel Core i9 Processor (12th Gen)](processor), [32 GB DDR4 RAM](ram) e [1 TB SSD](storage).
     - Cerco un laptop per [uso quotidiano](usage) con [Intel Core i3 Processor (11th Gen)](processor), [8 GB DDR4 RAM](ram) e [256 GB SSD](storage).
     - Voglio un portatile per [design e grafica](usage) con [AMD Ryzen 7 Hexa Core Processor](processor) e [16 GB DDR4 RAM](ram) e un display da [15.6 pollici](display).
     - Cerco un laptop ad alte prestazioni per [editing video e rendering](usage) con [Intel Core i9 Processor (11th Gen)](processor), [32 GB DDR4 RAM](ram) e [1 TB SSD](storage).
-    - Mi serve un portatile per [studio e lavoro](usage) con [Intel Core i5 Processor (11th Gen)](processor) e [8 GB DDR4 RAM](ram) che costi meno di [700 EUR](price_range).
+    - Mi serve un portatile per [studio e lavoro](usage) con [Intel Core i5 Processor (11th Gen)](processor) e [8 GB DDR4 RAM](ram) che costi meno di [700](price_range) EUR.
     - Cerco un notebook per [lavoro](usage) con [Windows 11 Operating System](os), [256 GB SSD](storage) e un design sottile.
-    - Voglio un laptop per [gaming](usage) con [AMD Ryzen 5 Hexa Core Processor](processor) e un display da [15.6 pollici](display) a un prezzo inferiore a [800 EUR](price_range).
+    - Voglio un laptop per [gaming](usage) con [AMD Ryzen 5 Hexa Core Processor](processor) e un display da [15.6 pollici](display) a un prezzo inferiore a [800](price_range) EUR.
     - Cerco un portatile per [video editing](usage) con [Apple M1 Pro Processor](processor) e [16 GB DDR4 RAM](ram).
     - Voglio un notebook per [programmazione e sviluppo](usage) con [Intel Core i7 Processor (11th Gen)](processor), [16 GB DDR4 RAM](ram) e [512 GB SSD](storage).
     - Cerco un laptop per [uso professionale](usage) con [AMD Ryzen 7 Octa Core Processor](processor) e [32 GB DDR4 RAM](ram), ideale per [multitasking](usage).
@@ -185,7 +185,7 @@ nlu:
     - Cerco un notebook con [Apple M1 Max Processor](processor) e [16 GB DDR4 RAM](ram) per [editing video](usage) e [grafica avanzata](usage).
     - Voglio un laptop economico per [uso di base](usage) con [Intel Core i3 Processor (10th Gen)](processor) e [4 GB DDR4 RAM](ram).
     - Cerco un portatile per [lavoro da remoto](usage) che supporti [Windows 11 Operating System](os), con [256 GB SSD](storage) e [14 pollici](display) per maggiore portabilità.
-    - Ho bisogno di un notebook per [multitasking](usage) con [Intel Core i5 Processor (11th Gen)](processor), [16 GB DDR4 RAM](ram) e un display da [15.6 pollici](display) a un prezzo ragionevole, sotto [700 EUR](price_range).
+    - Ho bisogno di un notebook per [multitasking](usage) con [Intel Core i5 Processor (11th Gen)](processor), [16 GB DDR4 RAM](ram) e un display da [15.6 pollici](display) a un prezzo ragionevole, sotto [700](price_range) EUR.
     - Cerco un laptop ad alte prestazioni per [lavoro e studio](usage) che includa [AMD Ryzen 7 Octa Core Processor](processor), [16 GB DDR4 RAM](ram) e [512 GB SSD](storage), con display da [15.6 pollici](display).
     - Cerco un laptop con rating [4.0-5.0](rating_range).
     - Preferirei un computer con un rating compreso tra [3.5-4.5](rating_range).
@@ -202,31 +202,31 @@ nlu:
 
 - intent: confronto_laptop
   examples: |
-    - Confronta il [Dell Inspiron](laptop) con il [HP Pavilion](laptop).
-    - Voglio comparare [MacBook Air](laptop) e [ASUS VivoBook](laptop) per prestazioni e prezzo.
-    - Quale laptop è migliore tra [HP Spectre](laptop) e [Asus ROG](laptop)?
-    - Metti a confronto il [Lenovo IdeaPad](laptop) e il [Acer Aspire](laptop).
-    - Confronta un laptop con [Intel Core i5 Processor (11th Gen)](processor) e uno con [AMD Ryzen 5 Quad Core Processor](processor).
-    - Vorrei confrontare il [Dell XPS 15](laptop) con il [HP Envy](laptop) per capire quale offra una migliore qualità costruttiva.
-    - Puoi confrontare il [MacBook Pro](laptop) e il [Microsoft Surface Laptop](laptop) in termini di performance e autonomia?
-    - Mi interessa un confronto tra [ASUS ZenBook](laptop) e [Lenovo ThinkPad](laptop) per uso professionale.
-    - Confronta il [Acer Predator](laptop) con il [MSI Gaming](laptop) per vedere quale sia più adatto al gaming.
-    - Vorrei sapere se il [HP Omen](laptop) è migliore del [Dell G5](laptop) per il gaming.
-    - Confronta un laptop con [AMD Ryzen 7 Octa Core Processor](processor) con uno che monta [Intel Core i7 Processor (11th Gen)](processor) in termini di potenza e prezzo.
-    - Quale tra [ASUS ROG](laptop) e [MSI Gaming](laptop) offre prestazioni migliori e un display più nitido?
-    - Confronta i modelli [Dell Vostro](laptop) e [HP 15s](laptop) per uso quotidiano.
-    - Mi puoi mostrare un confronto tra [Lenovo Yoga](laptop) e [Dell Inspiron 2-in-1](laptop) per versatilità e portabilità?
-    - Voglio confrontare i laptop [Apple MacBook Air](laptop) e [Apple MacBook Pro](laptop) per capire le differenze di prestazioni.
-    - Confronta il [HP Spectre x360](laptop) con il [Dell XPS 13 2-in-1](laptop) per uso professionale e mobilità.
-    - Quale offre un miglior equilibrio tra prestazioni e autonomia: [ASUS VivoBook](laptop) o [Acer Swift](laptop)?
-    - Vorrei un confronto dettagliato tra il [Lenovo Legion](laptop) e il [MSI Stealth](laptop) per il gaming intensivo.
-    - Metti a confronto il [Dell G7](laptop) e il [HP Omen](laptop) per vedere quale gestisca meglio i giochi più impegnativi.
+    - Confronta il [Dell Inspiron](laptop1) con il [HP Pavilion](laptop2).
+    - Confronta il [Dell Inspiron](laptop1) con il [HP G8](laptop2).
+    - Confronta il [ASUS Vivobook 15](laptop1) con il [HP G8](laptop2).
+    - Confronta il [APPLE 2021 Macbook Pro](laptop1) con il [HP G8](laptop2).
+    - Confronta il [acer Extensa](laptop1) con il [HP G8](laptop2).
+    - Voglio comparare [MacBook Air](laptop1) e [ASUS VivoBook](laptop2) per prestazioni e prezzo.
+    - Quale laptop è migliore tra [HP Spectre](laptop1) e [Asus ROG](laptop2)?
+    - Metti a confronto il [Lenovo IdeaPad](laptop1) e il [Acer Aspire](laptop2).
+    - Vorrei confrontare il [Dell XPS 15](laptop1) con il [HP Envy](laptop2) per capire quale offra una migliore qualità costruttiva.
+    - Puoi confrontare il [MacBook Pro](laptop1) e il [Microsoft Surface Laptop](laptop2) in termini di performance e autonomia?
+    - Mi interessa un confronto tra [ASUS ZenBook](laptop1) e [Lenovo ThinkPad](laptop2) per uso professionale.
+    - Confronta il [Acer Predator](laptop1) con il [MSI Gaming](laptop2) per vedere quale sia più adatto al gaming.
+    - Vorrei sapere se il [HP Omen](laptop1) è migliore del [Dell G5](laptop2) per il gaming.
+    - Confronta un laptop dotato di [Intel Core i5 Processor (11th Gen)](processor) con uno dotato di [AMD Ryzen 5 Quad Core Processor](processor) in termini di potenza e prezzo.
+    - Quale tra [ASUS ROG](laptop1) e [MSI Gaming](laptop2) offre prestazioni migliori e un display più nitido?
+    - Confronta i modelli [Dell Vostro](laptop1) e [HP 15s](laptop2) per uso quotidiano.
+    - Mi puoi mostrare un confronto tra [Lenovo Yoga](laptop1) e [Dell Inspiron 2-in-1](laptop2) per versatilità e portabilità?
+    - Voglio confrontare i laptop [Apple MacBook Air](laptop1) e [Apple MacBook Pro](laptop2) per capire le differenze di prestazioni.
+    - Confronta il [HP Spectre x360](laptop1) con il [Dell XPS 13 2-in-1](laptop2) per uso professionale e mobilità.
+    - Quale offre un miglior equilibrio tra prestazioni e autonomia: [ASUS VivoBook](laptop1) o [Acer Swift](laptop2)?
+    - Vorrei un confronto dettagliato tra il [Lenovo Legion](laptop1) e il [MSI Stealth](laptop2) per il gaming intensivo.
+    - Metti a confronto il [Dell G7](laptop1) e il [HP Omen](laptop2) per vedere quale gestisca meglio i giochi più impegnativi.
     - Confronta un laptop dotato di [Intel Core i7 Processor (12th Gen)](processor) con uno dotato di [AMD Ryzen 9 Octa Core Processor (10th Gen)](processor) per valutare la potenza di calcolo.
-    - Confronta il [Dell Inspiron](laptop) e il [HP Pavilion](laptop) in termini di design, performance e autonomia.
-    - Dimmi le differenze tra [MacBook Air](laptop) e [ASUS VivoBook](laptop) per capire quale sia più performante per il gaming.
-    - Mostrami un confronto tra il [Dell XPS 15](laptop) e il [HP Envy](laptop) focalizzato su durata della batteria e qualità costruttiva.
-    - Paragona [HP Spectre](laptop) e [Asus ROG](laptop) in termini di prestazioni, display e portabilità.
-    - Voglio un confronto tra [Acer Predator](laptop) e [MSI Gaming](laptop) evidenziando le differenze nella GPU e nel sistema di raffreddamento.
+    - Confronta il [Dell Inspiron](laptop1) e il [HP Pavilion](laptop2) in termini di design, performance e autonomia.
+    - Dimmi le differenze tra [MacBook Air](laptop1) e [ASUS VivoBook](laptop2) per capire quale sia più performante per il gaming.
 
 - intent: caratteristiche_laptop
   examples: |
@@ -258,17 +258,17 @@ nlu:
 
 - intent: prezzo_laptop
   examples: |
-    - Quanto costa il [Dell Inspiron](laptop) in [EUR](price_range)?
+    - Quanto costa il [Dell Inspiron](laptop) in [euro](price_range)?
     - Dimmi il prezzo del [MacBook Air](laptop).
     - Qual è il costo del [ASUS ZenBook](laptop)?
-    - Mostrami i portatili economici, ad esempio sotto [600 EUR](price_range).
+    - Mostrami i portatili economici, ad esempio sotto [600](price_range) EUR.
     - Vorrei sapere il prezzo di un laptop con [15.6 pollici](display).
-    - Qual è la fascia di prezzo del [HP Pavilion](laptop)? È sotto i [1000 EUR](price_range)?
+    - Qual è la fascia di prezzo del [HP Pavilion](laptop)? È sotto i [1000](price_range) EUR?
     - Puoi dirmi quanto costa il [Lenovo IdeaPad](laptop) con [Intel Core i5 Processor (11th Gen)](processor) e [8 GB DDR4 RAM](ram)?
     - Voglio sapere il prezzo del [Acer Aspire 5](laptop) con [AMD Ryzen 7 Octa Core Processor](processor) e almeno [512 GB SSD](storage).
     - Quanto devo spendere per un laptop con [32 GB LPDDR5 RAM](ram) e [1 TB SSD](storage)?
     - Qual è il prezzo medio di un laptop per [gaming](usage) con [Intel Core i7 Processor (12th Gen)](processor) e [16 GB DDR5 RAM](ram)?
-    - Mostrami i laptop disponibili sotto i [500 EUR](price_range) che abbiano almeno [8 GB DDR4 RAM](ram).
+    - Mostrami i laptop disponibili sotto i [500](price_range) EUR che abbiano almeno [8 GB DDR4 RAM](ram).
     - Qual è il prezzo attuale del [Dell XPS 15](laptop) con [64 bit Windows 11 Operating System](os)?
     - Qual è il prezzo attuale del [Dell XPS 15](laptop) con [32 bit Windows 11 Operating System](os)?
     - Qual è il prezzo attuale del [Dell XPS 15](laptop) con [Windows 11 Operating System](os)?
@@ -278,11 +278,11 @@ nlu:
     - Dimmi il prezzo di un notebook con schermo da [14 pollici](display) e un [Intel Core i3 Processor](processor).
     - Voglio sapere il prezzo dei laptop con [AMD Ryzen 5 Hexa Core Processor](processor) e almeno [256 GB SSD](storage).
     - Quanto costa il [MSI Stealth](laptop) con [Intel Core i9 Processor](processor) e [32 GB DDR5 RAM](ram)?
-    - Mi serve un portatile per [uso quotidiano](usage), preferibilmente sotto i [700 EUR](price_range); hai qualche opzione?
+    - Mi serve un portatile per [uso quotidiano](usage), preferibilmente sotto i [700](price_range) EUR; hai qualche opzione?
     - Quanto costa un laptop con [Intel Core i5 Processor (12th Gen)](processor), [8 GB DDR4 RAM](ram) e almeno [512 GB SSD](storage)?
     - Dimmi il costo di un laptop con una configurazione mista di storage, ad esempio [1 TB HDD|256 GB SSD](storage) e [8 GB DDR4 RAM](ram).
     - Qual è il prezzo di un notebook che abbia una configurazione mista [1 TB HDD|512 GB SSD](storage) e [16 GB DDR4 RAM](ram)?
-    - Vorrei sapere quanto costa un portatile con [1 TB HDD|256 GB SSD](storage) a un budget di [800 EUR](price_range).
+    - Vorrei sapere quanto costa un portatile con [1 TB HDD|256 GB SSD](storage) a un budget di [800](price_range) EUR.
     - Mi potresti dire il prezzo del [HP Pavilion](laptop) se è configurato con [1 TB HDD|256 GB SSD](storage) e [8 GB DDR4 RAM](ram)?
 
 - intent: consiglia_laptop
@@ -325,7 +325,7 @@ nlu:
 - intent: filtra_laptop
   examples: |
     - Filtra i laptop con [16 GB DDR4 RAM](ram) e [256 GB SSD](storage).
-    - Mostrami i portatili con [Intel Core i5 Processor (11th Gen)](processor) e prezzo sotto [500 EUR](price_range).
+    - Mostrami i portatili con [Intel Core i5 Processor (11th Gen)](processor) e prezzo sotto [500](price_range) EUR.
     - Voglio vedere laptop con [Windows 11 Operating System](os) e schermo da [15.6 pollici](display).
     - Voglio vedere laptop con [64 bit Windows 11 Operating System](os) e schermo da [15.6 pollici](display).
     - Voglio vedere laptop con [32 bit Windows 11 Operating System](os) e schermo da [15.6 pollici](display).
@@ -352,7 +352,7 @@ nlu:
     - Cerca notebook con [AMD Ryzen 9 Processor](processor) e display ad alta frequenza di aggiornamento.
     - Filtra i modelli con almeno [64 GB DDR5 RAM](ram) e GPU [RTX 4090](gpu).
     - Mostrami laptop che abbiano sia [SSD](storage) che [HDD](storage) per un'ampia capacità di archiviazione.
-    - Voglio un portatile con [Intel Core i5 Processor (12th Gen)](processor) e che non superi i [1000 EUR](price_range).
+    - Voglio un portatile con [Intel Core i5 Processor (12th Gen)](processor) e che non superi i [1000](price_range) EUR.
     - Trova notebook con [AMD Radeon RX 6800M](gpu) e display con [refresh rate 165Hz](display).
     - Filtra i laptop con configurazione mista [1 TB HDD|256 GB SSD](storage) e almeno [8 GB DDR4 RAM](ram).
     - Mostrami portatili con [Intel Core i7 Processor](processor) e opzioni di [storage](storage) flessibili, adatti per [uso quotidiano](usage).
