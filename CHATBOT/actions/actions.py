@@ -1,40 +1,3 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-"""
-================================================================================
-                           ACTIONS.PY - Chatbot Laptop Assistant
-================================================================================
-
-Descrizione:
-  Questo file contiene le azioni personalizzate per il chatbot che aiuta gli utenti 
-  nella ricerca, confronto e analisi di laptop. Le azioni includono funzioni per:
-    - Suggerire laptop basati su filtri avanzati (slot e parole chiave)
-    - Confrontare due laptop
-    - Mostrare dettagli tecnici completi di un laptop
-    - Restituire il prezzo di un laptop
-    - Fornire istruzioni e aiuto all'utente
-    - Mostrare una lista di laptop
-    - Filtrare e ordinare il dataset in base a criteri multipli
-    - Simulare aggiornamenti del dataset, variazioni di prezzo, ritardi e carichi di sistema
-    - Integrazione (simulata) di recensioni esterne e dati aggiuntivi
-    - Funzioni di debug e reportistica per il monitoraggio
-
-Requisiti:
-  - Il file CSV "laptops_etl_clean.csv" deve trovarsi nella stessa cartella (o nel percorso corretto).
-  - Il dataset deve avere le seguenti colonne:
-      Unnamed: 0, img_link, name, processor, ram, os, storage, display(in inch),
-      rating, no_of_ratings, no_of_reviews, price(in EUR)
-
-Autore: [Il Tuo Nome]
-Data: [Data di Creazione]
-
-================================================================================
-"""
-
-# =============================================================================
-# IMPORTS E CONFIGURAZIONE DEL LOGGING
-# =============================================================================
-
 import pandas as pd
 import logging
 import datetime
@@ -42,52 +5,25 @@ import time
 from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
+from rasa_sdk.events import SlotSet
 
-# Configurazione del logger per output dettagliato
+# Configurazione del logging
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 
-# =============================================================================
-# CARICAMENTO DEL DATASET
-# =============================================================================
-
+# -------------------- Caricamento del Dataset --------------------
 try:
-    # Legge il dataset pulito dei laptop
     df = pd.read_csv("laptops_etl_clean.csv")
-    # Rimuove eventuali righe con valori nulli nelle colonne critiche
-    df.dropna(subset=["processor", "ram", "os", "storage", "display(in inch)", "price(in EUR)"], inplace=True)
-    logger.info("Dataset caricato e pulito correttamente.")
+    logger.info("Dataset caricato correttamente.")
 except Exception as e:
     logger.error(f"Errore nel caricamento del dataset: {e}")
-    df = pd.DataFrame()  # Fallback in caso di errore
+    df = pd.DataFrame()
 
-# Aggiungi alcune righe vuote e commenti per aumentare la lunghezza del file
-# =============================================================================
-#
-#
-#
-# =============================================================================
-
-# =============================================================================
-# FUNZIONI HELPER
-# =============================================================================
-
+# -------------------- Funzioni Helper --------------------
 def format_laptop_details(row: pd.Series) -> str:
     """
-    Formatta le informazioni di un laptop in una stringa dettagliata.
-    
-    Parametri:
-      - row: Una riga del DataFrame contenente i dati di un laptop.
-    
-    Restituisce:
-      Una stringa che include:
-        * Processor
-        * RAM
-        * OS
-        * Storage
-        * Display (in pollici)
-        * Rating (con numero di valutazioni e recensioni)
-        * Prezzo in EUR
+    Formatta i dettagli del laptop in una stringa includendo le specifiche tecniche
+    e il link all'immagine.
     """
     details = (
         f"Processor: {row.get('processor', 'N/A')}\n"
@@ -97,71 +33,125 @@ def format_laptop_details(row: pd.Series) -> str:
         f"Display: {row.get('display(in inch)', 'N/A')} pollici\n"
         f"Rating: {row.get('rating', 'N/A')} (basato su {row.get('no_of_ratings', 'N/A')} valutazioni, {row.get('no_of_reviews', 'N/A')} recensioni)\n"
         f"Prezzo: {row.get('price(in EUR)', 'N/A')} EUR\n"
+        f"Immagine: {row.get('img_link', 'N/A')}"
     )
     return details
 
-# -----------------------------------------------------------------------------
-# FUNZIONE DI FILTRAGGIO AVANZATO
-# -----------------------------------------------------------------------------
-
 def advanced_filtering(tracker: Tracker) -> pd.DataFrame:
     """
-    Applica filtri avanzati al dataset basandosi sui valori degli slot definiti nel domain
-    e sulle eventuali parole chiave nel messaggio dell'utente.
-    
+    Applica filtri avanzati sul dataset basandosi sui valori degli slot definiti nel domain
+    e sulle parole chiave nel messaggio dell'utente.
+
     Utilizza:
-      - Slot 'ram', 'processor', 'storage', 'price_range' e 'usage'
+      - Slot: 'ram', 'processor', 'storage', 'price_range', 'usage', 'brand', 'display', 'rating_range'
       - Parole chiave nel messaggio (es. "economico", "sotto")
-    
+
     Restituisce:
       Un DataFrame filtrato contenente solo i laptop che soddisfano i criteri.
     """
     # Copia del DataFrame originale
     filtered_df = df.copy()
 
-    # Assicurarsi che la colonna prezzo sia numerica
+    # Assicurarsi che le colonne numeriche siano del tipo corretto
     filtered_df["price(in EUR)"] = pd.to_numeric(filtered_df["price(in EUR)"], errors="coerce")
+    try:
+        filtered_df["display(in inch)"] = filtered_df["display(in inch)"].astype(float)
+    except Exception as e:
+        logger.error(f"Errore nella conversione di 'display(in inch)': {e}")
 
-    logger.debug("Avvio del filtraggio avanzato basato sugli slot e sul messaggio.")
+    logger.debug("Avvio del filtraggio avanzato basato su slot e messaggio.")
 
     # Recupera i valori degli slot
     ram_slot = tracker.get_slot("ram")
     processor_slot = tracker.get_slot("processor")
     storage_slot = tracker.get_slot("storage")
     price_range_slot = tracker.get_slot("price_range")
+    price_condition_slot = tracker.get_slot("price_condition")  # Nuovo slot
     usage_slot = tracker.get_slot("usage")
+    brand_slot = tracker.get_slot("brand")
+    display_slot = tracker.get_slot("display")
+    rating_range_slot = tracker.get_slot("rating_range")
 
-    # Applicazione dei filtri basati sugli slot
+    # Filtro per RAM
     if ram_slot:
         filtered_df = filtered_df[filtered_df["ram"].str.contains(ram_slot, case=False, na=False)]
         logger.debug(f"Filtro applicato per RAM: {ram_slot}")
 
+    # Filtro per processore
     if processor_slot:
         filtered_df = filtered_df[filtered_df["processor"].str.contains(processor_slot, case=False, na=False)]
         logger.debug(f"Filtro applicato per processor: {processor_slot}")
 
+    # Filtro per storage
     if storage_slot:
         filtered_df = filtered_df[filtered_df["storage"].str.contains(storage_slot, case=False, na=False)]
         logger.debug(f"Filtro applicato per storage: {storage_slot}")
 
+    # Filtro per brand
+    if brand_slot:
+        filtered_df = filtered_df[filtered_df["name"].str.contains(brand_slot, case=False, na=False)]
+        logger.debug(f"Filtro applicato per brand: {brand_slot}")
+
+    # Filtro per prezzo
     if price_range_slot:
         try:
             price_limit = float(price_range_slot)
-            filtered_df = filtered_df[filtered_df["price(in EUR)"] < price_limit]
-            logger.debug(f"Filtro applicato per prezzo inferiore a: {price_limit} EUR")
+            # Applica filtro in base al valore di price_condition
+            if price_condition_slot == "superiore":
+                filtered_df = filtered_df[filtered_df["price(in EUR)"] > price_limit]
+                logger.debug(f"Filtro applicato per prezzo superiore a: {price_limit} EUR")
+            else:
+                # Impostazione di default: prezzo inferiore
+                filtered_df = filtered_df[filtered_df["price(in EUR)"] < price_limit]
+                logger.debug(f"Filtro applicato per prezzo inferiore a: {price_limit} EUR")
         except Exception as e:
-            logger.error(f"Errore nel convertire il prezzo: {e}")
+            logger.error(f"Errore nella conversione di price_range: {e}")
 
+    # Filtro per display (es. "15.6 pollici")
+    if display_slot:
+        try:
+            display_value = float(display_slot.split()[0])
+            # Considera un range di ±0.5 pollici
+            filtered_df = filtered_df[filtered_df["display(in inch)"].between(display_value - 0.5, display_value + 0.5)]
+            logger.debug(f"Filtro applicato per display: {display_value} pollici (±0.5)")
+        except Exception as e:
+            logger.error(f"Errore nel filtraggio per display: {e}")
+
+    # Filtro per rating_range (es. "4.0-5.0")
+    if rating_range_slot:
+        try:
+            min_rating, max_rating = map(float, rating_range_slot.split("-"))
+            filtered_df = filtered_df[(filtered_df["rating"] >= min_rating) & (filtered_df["rating"] <= max_rating)]
+            logger.debug(f"Filtro applicato per rating tra {min_rating} e {max_rating}")
+        except Exception as e:
+            logger.error(f"Errore nel filtraggio per rating_range: {e}")
+
+    # Filtro per uso specifico
     if usage_slot:
         usage_value = usage_slot.lower()
         if usage_value == "gaming":
             filtered_df = filtered_df[filtered_df["processor"].str.contains("Core i5|Core i7|Ryzen 7|Ryzen 9", case=False, na=False)]
             logger.debug("Filtro applicato per uso gaming basato sullo slot 'usage'.")
+        elif usage_value == "lavoro":
+            # Per il lavoro, potresti voler filtrare per laptop con sistema operativo Windows
+            filtered_df = filtered_df[filtered_df["os"].str.contains("Windows", case=False, na=False)]
+            logger.debug("Filtro applicato per uso lavoro basato sullo slot 'usage'.")
+        elif usage_value == "programmazione":
+            # Filtra per laptop con processori equilibrati per il multitasking
+            filtered_df = filtered_df[filtered_df["processor"].str.contains("Core i5|Core i7|Ryzen 5|Ryzen 7", case=False, na=False)]
+            logger.debug("Filtro applicato per uso programmazione basato sullo slot 'usage'.")
         elif usage_value in ["editing video", "rendering"]:
             filtered_df = filtered_df[filtered_df["processor"].str.contains("Core i9|Ryzen 9", case=False, na=False)]
-            logger.debug("Filtro applicato per editing video/rendering basato sullo slot 'usage'.")
+            logger.debug("Filtro applicato per uso editing video/rendering basato sullo slot 'usage'.")
+        elif usage_value == "studenti":
+            # Per gli studenti, potrebbe essere utile filtrare per opzioni più economiche
+            filtered_df = filtered_df[filtered_df["price(in EUR)"] < 700]
+            logger.debug("Filtro applicato per uso studenti basato sullo slot 'usage'.")
+        elif usage_value == "uso quotidiano":
+            # Per uso quotidiano, non applicare filtri troppo restrittivi, oppure usa criteri di bilanciamento
+            logger.debug("Filtro per uso quotidiano: nessun filtro specifico applicato.")
 
-    # Filtraggio aggiuntivo basato sul messaggio dell'utente
+    # Filtro aggiuntivo dal messaggio dell'utente
     user_message = tracker.latest_message.get("text", "").lower()
     if "economico" in user_message or "sotto" in user_message:
         filtered_df = filtered_df[filtered_df["price(in EUR)"] < 500]
@@ -170,21 +160,13 @@ def advanced_filtering(tracker: Tracker) -> pd.DataFrame:
     logger.debug(f"Filtraggio avanzato completato. {len(filtered_df)} laptop trovati.")
     return filtered_df
 
-# -----------------------------------------------------------------------------
-# FUNZIONE DI ORDINAMENTO AVANZATO
-# -----------------------------------------------------------------------------
 
-def advanced_sorting(filtered_df: pd.DataFrame, tracker: Tracker) -> pd.DataFrame:
+def advanced_sorting(filtered_df: pd.DataFrame, user_message: str) -> pd.DataFrame:
     """
-    Ordina il DataFrame filtrato in base alle preferenze espresse nel messaggio dell'utente.
-    
-    Se il messaggio contiene "migliore" o "top", ordina per rating (decrescente).
-    Altrimenti, ordina per prezzo (crescente).
-    
-    Restituisce:
-      Il DataFrame ordinato.
+    Ordina il DataFrame filtrato:
+      - Se il messaggio contiene "migliore" o "top", ordina per rating decrescente.
+      - Altrimenti, ordina per prezzo crescente.
     """
-    user_message = tracker.latest_message.get("text", "").lower()
     if "migliore" in user_message or "top" in user_message:
         sorted_df = filtered_df.sort_values(by="rating", ascending=False)
         logger.debug("Ordinamento applicato: rating decrescente.")
@@ -193,13 +175,7 @@ def advanced_sorting(filtered_df: pd.DataFrame, tracker: Tracker) -> pd.DataFram
         logger.debug("Ordinamento applicato: prezzo crescente.")
     return sorted_df
 
-# =============================================================================
-# AZIONI PERSONALIZZATE
-# =============================================================================
-
-# -----------------------------------------------------------------------------
-# Azione: Suggerisci Laptop
-# -----------------------------------------------------------------------------
+# -------------------- Azioni Personalizzate --------------------
 
 class ActionSuggerisciLaptop(Action):
     def name(self) -> Text:
@@ -207,40 +183,41 @@ class ActionSuggerisciLaptop(Action):
 
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict]:
         """
-        Suggerisce laptop basandosi sui valori degli slot (definiti nel domain)
-        e sul messaggio dell'utente. Applica filtri avanzati e ordina i risultati
-        in base al prezzo (default).
+        Suggerisce laptop basandosi sui filtri avanzati (slot e parole chiave) e restituisce i primi 3 risultati ordinati per prezzo.
         """
         user_message = tracker.latest_message.get("text", "").lower()
         logger.debug(f"Messaggio utente per ricerca laptop: {user_message}")
-
         try:
-            # Applica il filtraggio avanzato
             filtered_laptops = advanced_filtering(tracker)
             logger.debug(f"Laptop trovati dopo filtraggio: {len(filtered_laptops)}")
-            
-            # Ordina i risultati (default: per prezzo crescente)
-            sorted_laptops = advanced_sorting(filtered_laptops, tracker)
+            sorted_laptops = advanced_sorting(filtered_laptops, user_message)
             logger.debug(f"Laptop trovati dopo ordinamento: {len(sorted_laptops)}")
             
-            # Costruisce la risposta
-            if sorted_laptops.empty:
-                risposta = "Mi dispiace, non ho trovato laptop che corrispondano alle tue richieste."
+            # Gestione del limite dei risultati
+            limit_slot = tracker.get_slot("limit")
+            if limit_slot:
+                try:
+                    limit_value = int(float(limit_slot))
+                    results = sorted_laptops.head(limit_value)
+                    logger.debug(f"Limitato a {limit_value} risultati.")
+                except Exception as e:
+                    logger.error(f"Errore nella conversione del limite: {e}")
+                    results = sorted_laptops.head(3)
+            else:
+                results = sorted_laptops.head(3)
+                
+            if results.empty:
+                risposta = "Mi dispiace, non ho trovato laptop che soddisfino i criteri specificati."
             else:
                 risposta = "Ecco alcuni laptop che potrebbero interessarti:\n\n"
-                for _, row in sorted_laptops.head(3).iterrows():
+                for _, row in results.iterrows():
                     dettagli = format_laptop_details(row)
-                    risposta += f"- **{row['name']}**:\n{dettagli}\n"
+                    risposta += f"- **{row['name']}**:\n{dettagli}\n\n"
             dispatcher.utter_message(text=risposta)
         except Exception as e:
             logger.exception(f"Errore in ActionSuggerisciLaptop: {e}")
             dispatcher.utter_message(text=f"Si è verificato un errore durante la ricerca dei laptop: {e}")
         return []
-
-
-# -----------------------------------------------------------------------------
-# Azione: Confronta Laptop
-# -----------------------------------------------------------------------------
 
 class ActionConfrontaLaptop(Action):
     def name(self) -> Text:
@@ -249,74 +226,78 @@ class ActionConfrontaLaptop(Action):
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict]:
         """
         Confronta due laptop specificati dagli slot 'laptop1' e 'laptop2'.
-        Gestisce errori se uno dei nomi non viene trovato.
+        Se per uno dei termini vengono trovati più record, richiede una specifica ulteriore.
         """
-        laptop1 = tracker.get_slot("laptop1")
-        laptop2 = tracker.get_slot("laptop2")
-        logger.debug(f"Richiesta di confronto tra: {laptop1} e {laptop2}")
-
-        if not laptop1 or not laptop2:
+        laptop1_input = tracker.get_slot("laptop1")
+        laptop2_input = tracker.get_slot("laptop2")
+        logger.debug(f"Richiesta confronto tra: {laptop1_input} e {laptop2_input}")
+        
+        if not laptop1_input or not laptop2_input:
             dispatcher.utter_message(text="Per favore, specifica i nomi di entrambi i laptop da confrontare.")
             return []
-        try:
-            data1 = df[df["name"] == laptop1].iloc[0]
-            data2 = df[df["name"] == laptop2].iloc[0]
-        except IndexError as e:
-            logger.error(f"Errore nel confronto: {e}")
-            dispatcher.utter_message(text="Non sono riuscito a trovare uno dei laptop specificati. Verifica i nomi inseriti.")
+        
+        # Cerca le corrispondenze per il primo laptop
+        matches1 = df[df["name"].str.contains(laptop1_input, case=False, na=False)]
+        if matches1.empty:
+            dispatcher.utter_message(text=f"Non sono riuscito a trovare un laptop che corrisponda a '{laptop1_input}'.")
+            return []
+        elif len(matches1) > 1:
+            response = f"Ho trovato più laptop che corrispondono a '{laptop1_input}':\n"
+            for _, row in matches1.iterrows():
+                response += f"- {row['name']}\n"
+            response += "\nPer favore, specifica meglio il nome del primo laptop."
+            dispatcher.utter_message(text=response)
             return []
 
-        response = f"Confronto dettagliato tra **{laptop1}** e **{laptop2}**:\n\n"
-        response += f"### {laptop1}\n{format_laptop_details(data1)}\n"
-        response += f"### {laptop2}\n{format_laptop_details(data2)}\n"
+        # Cerca le corrispondenze per il secondo laptop
+        matches2 = df[df["name"].str.contains(laptop2_input, case=False, na=False)]
+        if matches2.empty:
+            dispatcher.utter_message(text=f"Non sono riuscito a trovare un laptop che corrisponda a '{laptop2_input}'.")
+            return []
+        elif len(matches2) > 1:
+            response = f"Ho trovato più laptop che corrispondono a '{laptop2_input}':\n"
+            for _, row in matches2.iterrows():
+                response += f"- {row['name']}\n"
+            response += "\nPer favore, specifica meglio il nome del secondo laptop."
+            dispatcher.utter_message(text=response)
+            return []
+
+        # Se esattamente un match per ciascuno, procedi con il confronto
+        data1 = matches1.iloc[0]
+        data2 = matches2.iloc[0]
+        response = f"Confronto dettagliato tra **{data1['name']}** e **{data2['name']}**:\n\n"
+        response += f"### {data1['name']}\n{format_laptop_details(data1)}\n\n"
+        response += f"### {data2['name']}\n{format_laptop_details(data2)}\n"
         dispatcher.utter_message(text=response)
         return []
-
-
-# -----------------------------------------------------------------------------
-# Azione: Caratteristiche Laptop
-# -----------------------------------------------------------------------------
-
 class ActionCaratteristicheLaptop(Action):
     def name(self) -> Text:
         return "action_caratteristiche_laptop"
 
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict]:
         """
-        Fornisce una descrizione dettagliata del laptop specificato nello slot 'laptop'.
-        Se il valore inserito corrisponde parzialmente a più laptop, chiede all'utente di specificare meglio.
+        Fornisce una descrizione dettagliata del laptop in base al valore dello slot 'laptop'.
+        Se vengono trovati più record, elenca le opzioni per ulteriori precisazioni.
         """
-        laptop = tracker.get_slot("laptop")
-        logger.debug(f"Richiesta dettagli per laptop: {laptop}")
-
-        if not laptop:
+        laptop_input = tracker.get_slot("laptop")
+        logger.debug(f"Richiesta dettagli per laptop: {laptop_input}")
+        if not laptop_input:
             dispatcher.utter_message(text="Per favore, specifica il nome del laptop di cui vuoi conoscere le caratteristiche.")
             return []
-        try:
-            # Effettua un match parziale (case insensitive) sulla colonna "name"
-            filtered = df[df["name"].str.contains(laptop, case=False, na=False)]
-            if filtered.empty:
-                raise IndexError("Nessun laptop trovato.")
-            
-            # Se troviamo più di un risultato, chiediamo all'utente di precisare
-            if len(filtered) > 1:
-                laptop_list = filtered["name"].tolist()
-                response = ("Ho trovato più laptop che corrispondono alla tua ricerca:\n" +
-                            "\n".join(f"- {name}" for name in laptop_list) +
-                            "\nPer favore, specifica il nome completo del laptop che ti interessa.")
-            else:
-                data = filtered.iloc[0]
-                response = f"Dettagli completi di **{data['name']}**:\n\n{format_laptop_details(data)}"
-        except IndexError:
-            logger.error(f"Laptop non trovato: {laptop}")
-            response = "Non sono riuscito a trovare il laptop specificato. Controlla il nome e riprova."
-        dispatcher.utter_message(text=response)
+        matches = df[df["name"].str.contains(laptop_input, case=False, na=False)]
+        if matches.empty:
+            logger.error(f"Nessun laptop trovato per: {laptop_input}")
+            dispatcher.utter_message(text="Non sono riuscito a trovare il laptop specificato. Controlla il nome e riprova.")
+        elif len(matches) == 1:
+            data = matches.iloc[0]
+            response = f"Dettagli completi di **{data['name']}**:\n\n{format_laptop_details(data)}"
+            dispatcher.utter_message(text=response)
+        else:
+            response = "Ho trovato più laptop che corrispondono al termine inserito. Per favore, scegli uno tra i seguenti:\n"
+            for _, row in matches.iterrows():
+                response += f"- {row['name']}\n"
+            dispatcher.utter_message(text=response)
         return []
-
-
-# -----------------------------------------------------------------------------
-# Azione: Prezzo Laptop
-# -----------------------------------------------------------------------------
 
 class ActionPrezzoLaptop(Action):
     def name(self) -> Text:
@@ -324,28 +305,31 @@ class ActionPrezzoLaptop(Action):
 
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict]:
         """
-        Restituisce il prezzo del laptop specificato nello slot 'laptop'.
-        Gestisce eventuali errori se il laptop non viene trovato.
+        Restituisce il prezzo del laptop in base al valore dello slot 'laptop'.
+        Se vengono trovati più record, elenca le opzioni con il relativo prezzo.
         """
-        laptop = tracker.get_slot("laptop")
-        logger.debug(f"Richiesta prezzo per laptop: {laptop}")
-
-        if not laptop:
+        laptop_input = tracker.get_slot("laptop")
+        logger.debug(f"Richiesta prezzo per laptop: {laptop_input}")
+        if not laptop_input:
             dispatcher.utter_message(text="Per favore, specifica il nome del laptop per conoscere il prezzo.")
             return []
         try:
-            prezzo = df[df["name"] == laptop]["price(in EUR)"].values[0]
-            response = f"Il prezzo di **{laptop}** è {prezzo} EUR."
-        except IndexError:
-            logger.error(f"Prezzo non trovato per il laptop: {laptop}")
-            response = "Non sono riuscito a trovare il laptop specificato. Verifica il nome e riprova."
-        dispatcher.utter_message(text=response)
+            matches = df[df["name"].str.contains(laptop_input, case=False, na=False)]
+            if matches.empty:
+                response = "Non sono riuscito a trovare il laptop specificato. Controlla il nome e riprova."
+            elif len(matches) == 1:
+                prezzo = matches.iloc[0]["price(in EUR)"]
+                response = f"Il prezzo di **{matches.iloc[0]['name']}** è {prezzo} EUR."
+            else:
+                response = "Ho trovato più laptop corrispondenti. Ecco le opzioni:\n"
+                for _, row in matches.iterrows():
+                    response += f"- {row['name']}: {row['price(in EUR)']} EUR\n"
+                response += "\nPer favore, specifica meglio il nome del laptop."
+            dispatcher.utter_message(text=response)
+        except Exception as e:
+            logger.error(f"Errore in ActionPrezzoLaptop: {e}")
+            dispatcher.utter_message(text="Si è verificato un errore durante la ricerca del prezzo del laptop.")
         return []
-
-
-# -----------------------------------------------------------------------------
-# Azione: Aiuto (Help)
-# -----------------------------------------------------------------------------
 
 class ActionHelp(Action):
     def name(self) -> Text:
@@ -353,25 +337,14 @@ class ActionHelp(Action):
 
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict]:
         """
-        Fornisce istruzioni e suggerimenti su come utilizzare il chatbot per trovare il laptop ideale.
+        Fornisce istruzioni su come utilizzare il chatbot per trovare il laptop ideale.
         """
         message = (
-            "Sono qui per aiutarti a trovare il laptop ideale!\n"
-            "Puoi chiedermi di cercare un laptop per uso specifico (ad esempio, [gaming](usage), [lavoro](usage), [editing video](usage)),\n"
-            "oppure di confrontarne due, fornendoti dettagli tecnici o il prezzo.\n"
-            "Esempi:\n"
-            " - 'Cerco un laptop per gaming con Intel Core i7 e 16GB di RAM'\n"
-            " - 'Confronta il Dell Inspiron con il MacBook Air'\n"
-            " - 'Dimmi le caratteristiche del MacBook Pro'\n"
-            " - 'Qual è il prezzo del Dell XPS 15'\n"
+            "Sono qui per aiutarti a trovare il laptop ideale! Puoi chiedermi di cercare un laptop per uso specifico (ad es. [gaming](usage), [lavoro](usage), [editing video](usage)) "
+            "oppure di confrontarne due. Prova a dire: 'Cerco un laptop per gaming con Intel Core i7 e 16GB di RAM' oppure 'Parlami del MacBook Air M1'."
         )
         dispatcher.utter_message(text=message)
         return []
-
-
-# -----------------------------------------------------------------------------
-# Azione: Mostra Lista Laptop
-# -----------------------------------------------------------------------------
 
 class ActionShowLaptopList(Action):
     def name(self) -> Text:
@@ -379,7 +352,7 @@ class ActionShowLaptopList(Action):
 
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict]:
         """
-        Mostra una lista di alcuni laptop disponibili con dettagli di base.
+        Mostra una lista di alcuni laptop disponibili, con dettagli di base.
         """
         logger.debug("Richiesta lista laptop.")
         try:
@@ -390,285 +363,66 @@ class ActionShowLaptopList(Action):
                     f"- **{row['name']}**: {row['processor']}, {row['ram']}, {row['os']}, "
                     f"{row['storage']}, Display: {row['display(in inch)']} pollici, Prezzo: {row['price(in EUR)']} EUR\n\n"
                 )
+            dispatcher.utter_message(text=response)
         except Exception as e:
             logger.error(f"Errore nel recupero della lista laptop: {e}")
-            response = "Si è verificato un errore nel recuperare la lista dei laptop."
-        dispatcher.utter_message(text=response)
+            dispatcher.utter_message(text="Si è verificato un errore nel recupero della lista dei laptop.")
         return []
 
+# -------------------- Action per Mostrare l'Immagine --------------------
 
-# =============================================================================
-# SEZIONE: FUNZIONI DI SUPPORTO (Filtraggio, Ordinamento, Debug, Aggiornamenti)
-# =============================================================================
-
-def get_laptop_by_brand(brand: Text) -> pd.DataFrame:
-    """Restituisce i laptop che contengono il brand specificato nel nome."""
-    logger.debug(f"Filtraggio per brand: {brand}")
-    return df[df["name"].str.contains(brand, case=False, na=False)]
-
-
-def get_laptop_by_processor(processor: Text) -> pd.DataFrame:
-    """Restituisce i laptop che contengono il processore specificato."""
-    logger.debug(f"Filtraggio per processore: {processor}")
-    return df[df["processor"].str.contains(processor, case=False, na=False)]
-
-
-def get_laptop_by_ram(ram: Text) -> pd.DataFrame:
-    """Restituisce i laptop che contengono la quantità di RAM specificata."""
-    logger.debug(f"Filtraggio per RAM: {ram}")
-    return df[df["ram"].str.contains(ram, case=False, na=False)]
-
-
-def get_laptop_by_price(max_price: float) -> pd.DataFrame:
-    """Restituisce i laptop con prezzo inferiore a max_price."""
-    logger.debug(f"Filtraggio per prezzo inferiore a: {max_price} EUR")
-    return df[df["price(in EUR)"] < max_price]
-
-
-def sort_laptops_by_rating(laptops: pd.DataFrame) -> pd.DataFrame:
-    """Ordina i laptop per rating in ordine decrescente."""
-    logger.debug("Ordinamento per rating decrescente.")
-    return laptops.sort_values(by="rating", ascending=False)
-
-
-def sort_laptops_by_price(laptops: pd.DataFrame, ascending: bool = True) -> pd.DataFrame:
-    """Ordina i laptop in base al prezzo."""
-    logger.debug(f"Ordinamento per prezzo, ascending={ascending}.")
-    return laptops.sort_values(by="price(in EUR)", ascending=ascending)
-
-
-# -----------------------------------------------------------------------------
-# Funzioni di Debug e Utility
-# -----------------------------------------------------------------------------
-
-def log_current_time() -> None:
-    """Registra e logga l'orario corrente per scopi di debug."""
-    current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    logger.debug(f"Orario corrente: {current_time}")
-
-
-def simulate_processing_delay(seconds: int = 1) -> None:
-    """Simula un ritardo nel processamento per emulare operazioni intensive."""
-    logger.debug(f"Simulazione di un ritardo di {seconds} secondi...")
-    time.sleep(seconds)
-
-
-# -----------------------------------------------------------------------------
-# AZIONI DI DEBUG, REPORT E SIMULAZIONE DI CARICO
-# -----------------------------------------------------------------------------
-
-class ActionSimulaRitardo(Action):
+class ActionMostraImmagineLaptop(Action):
     def name(self) -> Text:
-        return "action_simula_ritardo"
-
-    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict]:
-        """Simula un ritardo nel processing per testare l'impatto sui tempi di risposta."""
-        dispatcher.utter_message(text="Attendere, sto elaborando la richiesta...")
-        simulate_processing_delay(3)
-        dispatcher.utter_message(text="Elaborazione completata!")
-        return []
-
-
-class ActionAggiornaDataset(Action):
-    def name(self) -> Text:
-        return "action_aggiorna_dataset"
+        return "action_mostra_immagine_laptop"
 
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict]:
         """
-        Ricarica il dataset dal file CSV e aggiorna la variabile globale.
+        Mostra l'immagine del laptop basandosi sul valore dello slot 'laptop'.
+        Se vengono trovate più corrispondenze, invia tutte le immagini trovate.
         """
-        log_current_time()
-        try:
-            updated_df = pd.read_csv("..\\laptop_etl.csv")
-            global df
-            df = updated_df.copy()
-            logger.info("Dataset aggiornato con successo.")
-            dispatcher.utter_message(text="Il dataset dei laptop è stato aggiornato con successo.")
-        except Exception as e:
-            logger.error(f"Errore durante l'aggiornamento del dataset: {e}")
-            dispatcher.utter_message(text="Si è verificato un errore durante l'aggiornamento del dataset.")
-        return []
+        laptop_input = tracker.get_slot("laptop")
+        logger.debug(f"Richiesta di mostrare immagine per: {laptop_input}")
 
-
-class ActionAggiornaPrezzi(Action):
-    def name(self) -> Text:
-        return "action_aggiorna_prezzi"
-
-    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict]:
-        """
-        Aggiorna i prezzi dei laptop in base al fattore specificato nello slot 'price_update_factor'.
-        """
-        factor_str = tracker.get_slot("price_update_factor")
-        logger.debug(f"Fattore di aggiornamento dei prezzi ricevuto: {factor_str}")
-        try:
-            factor = float(factor_str) if factor_str else 1.0
-            df["price(in EUR)"] = df["price(in EUR)"] * factor
-            logger.info(f"Prezzi aggiornati con fattore {factor}.")
-            response = f"I prezzi sono stati aggiornati con un fattore di {factor}."
-        except Exception as e:
-            logger.error(f"Errore in ActionAggiornaPrezzi: {e}")
-            response = "Si è verificato un errore durante l'aggiornamento dei prezzi."
-        dispatcher.utter_message(text=response)
-        return []
-
-
-class ActionGeneraReport(Action):
-    def name(self) -> Text:
-        return "action_genera_report"
-
-    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict]:
-        """
-        Genera un report d'utilizzo simulato basato sui dati del dataset.
-        """
-        try:
-            total_laptops = len(df)
-            avg_price = df["price(in EUR)"].mean()
-            avg_rating = df["rating"].mean()
-            report = (
-                f"Report d'utilizzo:\n"
-                f"- Totale laptop: {total_laptops}\n"
-                f"- Prezzo medio: {avg_price:.2f} EUR\n"
-                f"- Rating medio: {avg_rating:.2f}\n"
-            )
-        except Exception as e:
-            logger.error(f"Errore in ActionGeneraReport: {e}")
-            report = "Non sono riuscito a calcolare le statistiche del dataset."
-        dispatcher.utter_message(text=report)
-        return []
-
-
-class ActionDebugStato(Action):
-    def name(self) -> Text:
-        return "action_debug_stato"
-
-    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict]:
-        """
-        Restituisce lo stato attuale degli slot e del tracker per scopi di debug.
-        """
-        slots = tracker.current_slot_values()
-        debug_info = "Stato attuale degli slot:\n"
-        for key, value in slots.items():
-            debug_info += f"- {key}: {value}\n"
-        dispatcher.utter_message(text=debug_info)
-        logger.debug(debug_info)
-        return []
-
-
-class ActionLogEventi(Action):
-    def name(self) -> Text:
-        return "action_log_eventi"
-
-    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict]:
-        """
-        Logga informazioni dettagliate sulla conversazione per analisi successive.
-        """
-        events = tracker.events
-        logger.debug("Eventi della conversazione:")
-        for event in events:
-            logger.debug(event)
-        dispatcher.utter_message(text="Ho registrato tutti gli eventi della conversazione per il debug.")
-        return []
-
-
-class ActionSimulaCarico(Action):
-    def name(self) -> Text:
-        return "action_simula_carico"
-
-    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict]:
-        """
-        Simula un carico elevato nel sistema per testare la scalabilità del chatbot.
-        """
-        logger.debug("Simulazione di carico in corso...")
-        total = 0
-        for i in range(1000000):
-            total += i
-            if i % 200000 == 0:
-                logger.debug(f"Caricamento: iterazione {i}")
-        dispatcher.utter_message(text="Simulazione di carico completata. Il sistema ha gestito il carico con successo!")
-        return []
-
-
-# -----------------------------------------------------------------------------
-# Azioni per Integrazione con Dati Esterni e Recensioni
-# -----------------------------------------------------------------------------
-
-def simulate_external_api_call() -> str:
-    """
-    Simula una chiamata ad un'API esterna che restituisce dati aggiuntivi sul laptop.
-    """
-    logger.debug("Simulazione chiamata API esterna in corso...")
-    time.sleep(2)
-    return "Recensioni, benchmark e suggerimenti aggiornati."
-
-class ActionRecuperaDatiEsterni(Action):
-    def name(self) -> Text:
-        return "action_recupera_dati_esterni"
-
-    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict]:
-        """
-        Recupera dati esterni (simulati) per arricchire le informazioni sul laptop specificato.
-        """
-        laptop = tracker.get_slot("laptop")
-        if not laptop:
-            dispatcher.utter_message(text="Per favore, specifica il nome del laptop per cui vuoi dati esterni.")
+        if not laptop_input:
+            dispatcher.utter_message(text="Per favore, specifica il nome del laptop di cui vuoi vedere l'immagine.")
             return []
-        try:
-            external_data = simulate_external_api_call()
-            response = f"Dati esterni per {laptop}:\n{external_data}"
-        except Exception as e:
-            logger.error(f"Errore nella chiamata API esterna: {e}")
-            response = "Si è verificato un errore nel recuperare dati esterni per questo laptop."
-        dispatcher.utter_message(text=response)
+
+        matches = df[df["name"].str.contains(laptop_input, case=False, na=False)]
+        if matches.empty:
+            dispatcher.utter_message(text="Non sono riuscito a trovare il laptop specificato. Controlla il nome e riprova.")
+        elif len(matches) == 1:
+            img_link = matches.iloc[0].get("img_link", None)
+            if img_link and isinstance(img_link, str) and img_link.strip():
+                dispatcher.utter_message(text="Ecco l'immagine del laptop:", image=img_link)
+            else:
+                dispatcher.utter_message(text="Mi dispiace, non ho trovato un link all'immagine per questo laptop.")
+        else:
+            # Se ci sono più corrispondenze, invia tutte le immagini trovate
+            response = "Ho trovato più laptop corrispondenti. Ecco le immagini disponibili:\n"
+            images_found = False
+            for _, row in matches.iterrows():
+                img_link = row.get("img_link", None)
+                if img_link and isinstance(img_link, str) and img_link.strip():
+                    response += f"- {row['name']}: {img_link}\n"
+                    images_found = True
+            if images_found:
+                dispatcher.utter_message(text=response)
+            else:
+                dispatcher.utter_message(text="Ho trovato più laptop, ma nessuno presenta un link valido all'immagine.")
         return []
-
-
-class ActionAggiungiRecensioni(Action):
+    
+class ActionResetSlots(Action):
     def name(self) -> Text:
-        return "action_aggiungi_recensioni"
+        return "action_reset_slots"
 
-    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict]:
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict]:
         """
-        Aggiunge recensioni esterne al dettaglio del laptop.
+        Resetta tutti gli slot impostando il loro valore a None.
         """
-        laptop = tracker.get_slot("laptop")
-        logger.debug(f"Richiesta recensioni per: {laptop}")
-        if not laptop:
-            dispatcher.utter_message(text="Per favore, specifica il nome del laptop per vedere le recensioni.")
-            return []
-        try:
-            # Simula la raccolta delle recensioni
-            reviews_text = "\n".join([
-                "Questo modello è eccezionale per il gaming!",
-                "Ottimo per il multitasking, ma la batteria potrebbe essere migliore.",
-                "Il design è molto elegante e la performance soddisfacente."
-            ])
-            response = f"Recensioni per {laptop}:\n{reviews_text}"
-        except Exception as e:
-            logger.error(f"Errore nell'integrazione delle recensioni: {e}")
-            response = "Non sono riuscito a recuperare le recensioni per questo laptop."
-        dispatcher.utter_message(text=response)
-        return []
-
-
-# =============================================================================
-# SEZIONE: COMMENTI E SPAZI AGGIUNTIVI PER DOCUMENTAZIONE
-# =============================================================================
-#
-#
-#
-# Le righe seguenti sono aggiunte per garantire una documentazione completa
-# e per aumentare la dimensione del file come richiesto. 
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-# =============================================================================
-# FINE DEL FILE ACTIONS.PY
-# =============================================================================
+        events = []
+        for slot in tracker.current_slot_values().keys():
+            events.append(SlotSet(slot, None))
+        dispatcher.utter_message(text="Tutti gli slot sono stati resettati.")
+        return events

@@ -60,3 +60,15 @@ rules:
   steps:
     - intent: dettagli_laptop
     - action: action_caratteristiche_laptop
+
+- rule: Gestisci richiesta di mostrare immagine
+  steps:
+    - intent: mostra_immagine
+    - action: action_mostra_immagine_laptop
+
+- rule: Gestisci richiesta con range di rating
+  condition:
+    - slot_was_set: [rating_range]
+  steps:
+    - intent: cerca_laptop
+    - action: action_suggerisci_laptop

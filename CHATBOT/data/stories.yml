@@ -68,3 +68,42 @@ stories:
     - action: utter_ringraziamento
     - intent: addio
     - action: utter_addio
+
+- story: Mostra immagine del laptop
+  steps:
+    - intent: mostra_immagine
+    - action: action_mostra_immagine_laptop
+
+- story: Ricerca laptop con range di rating
+  steps:
+    - intent: cerca_laptop
+    - action: laptop_form
+    - active_loop: laptop_form
+    - action: action_suggerisci_laptop
+
+- story: Ricerca laptop con filtro prezzo e limit
+  steps:
+    - intent: cerca_laptop
+      entities:
+        - price_range: "800"
+        - price_condition: "inferiore"
+        - limit: "1"
+    - action: laptop_form
+    - active_loop: laptop_form
+    - action: action_suggerisci_laptop
+
+- story: Ricerca laptop per uso specifico e prezzo superiore
+  steps:
+    - intent: cerca_laptop
+      entities:
+        - usage: "lavoro"
+        - price_range: "1200"
+        - price_condition: "superiore"
+    - action: laptop_form
+    - active_loop: laptop_form
+    - action: action_suggerisci_laptop
+
+- story: Reset degli slot
+  steps:
+    - intent: reset_slots
+    - action: action_reset_slots

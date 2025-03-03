@@ -137,6 +137,24 @@ nlu:
 - intent: cerca_laptop
   examples: |
     - Cerco un laptop per [gaming](usage) con [Intel Core i7 Processor (11th Gen)](processor) e almeno [16 GB DDR4 RAM](ram).
+    - Voglio un notebook con prezzo [700 EUR](price_range) [inferiore](price_condition).
+    - Mi serve un portatile con prezzo [1000 EUR](price_range) [superiore](price_condition) per avere più potenza.
+    - Mostrami solo [1](limit) laptop economico, sotto [500 EUR](price_range) [inferiore](price_condition).
+    - Cerco un laptop per [lavoro](usage) con [Windows 11 Operating System](os), [256 GB SSD](storage) e un prezzo sotto [800 EUR](price_range) [inferiore](price_condition).
+    - Cerco un laptop per [gaming](usage) con [Intel Core i7 Processor (11th Gen)](processor) e almeno [16 GB DDR4 RAM](ram).
+    - Vorrei un notebook con prezzo [900 EUR](price_range) [inferiore](price_condition) che offra ottime prestazioni.
+    - Cerco un portatile con prezzo [1200 EUR](price_range) [superiore](price_condition) per attività intensive.
+    - Mostrami solo [2](limit) laptop con prezzo [500 EUR](price_range) [inferiore](price_condition) e buon rapporto qualità-prezzo.
+    - Desidero un laptop per [editing video](usage) con prezzo [1500 EUR](price_range) [superiore](price_condition) per avere prestazioni al top.
+    - Cerco un computer portatile con prezzo [600 EUR](price_range) [inferiore](price_condition) e ottima durata della batteria.
+    - Ho bisogno di un notebook con prezzo [800 EUR](price_range) [inferiore](price_condition) per uso quotidiano.
+    - Vorrei un laptop per [programmazione](usage) con prezzo [1100 EUR](price_range) [superiore](price_condition) per ottenere più memoria e potenza.
+    - Mostrami solo [1](limit) notebook con prezzo [750 EUR](price_range) [inferiore](price_condition) e design elegante.
+    - Cerco un portatile per [lavoro](usage) con prezzo [650 EUR](price_range) [inferiore](price_condition) e prestazioni affidabili.
+    - Vorrei un laptop con prezzo [950 EUR](price_range) [superiore](price_condition) per attività di grafica avanzata.
+    - Mi serve un notebook con prezzo [550 EUR](price_range) [inferiore](price_condition) per uso quotidiano, mostra solo [1](limit) risultato.
+    - Cerco un laptop per [studenti](usage) con prezzo [700 EUR](price_range) [inferiore](price_condition) e costi contenuti.
+    - Voglio un computer portatile con prezzo [1300 EUR](price_range) [superiore](price_condition) per gaming di alta qualità.
     - Mi serve un portatile con [AMD Ryzen 5 Hexa Core Processor](processor) e [16 GB DDR4 RAM](ram) per uso quotidiano.
     - Voglio un notebook per [lavoro](usage) con [Windows 11 Operating System](os) e [256 GB SSD](storage).
     - Cerco un laptop economico, preferibilmente sotto [500 EUR](price_range).
@@ -166,6 +184,21 @@ nlu:
     - Cerco un portatile per [lavoro da remoto](usage) che supporti [Windows 11 Operating System](os), con [256 GB SSD](storage) e [14 pollici](display) per maggiore portabilità.
     - Ho bisogno di un notebook per [multitasking](usage) con [Intel Core i5 Processor (11th Gen)](processor), [16 GB DDR4 RAM](ram) e un display da [15.6 pollici](display) a un prezzo ragionevole, sotto [700 EUR](price_range).
     - Cerco un laptop ad alte prestazioni per [lavoro e studio](usage) che includa [AMD Ryzen 7 Octa Core Processor](processor), [16 GB DDR4 RAM](ram) e [512 GB SSD](storage), con display da [15.6 pollici](display).
+    - Cerco un laptop con rating [4.0-5.0](rating_range)
+    - Preferirei un computer con un rating compreso tra [3.5-4.5](rating_range)
+    - Cerco un laptop ad alte prestazioni per [lavoro e studio](usage) che includa [AMD Ryzen 7 Octa Core Processor](processor), [16 GB DDR4 RAM](ram) e [512 GB SSD](storage), con display da [15.6 pollici](display).
+    - Cerco un laptop con rating [4.0-5.0](rating_range).
+    - Preferirei un computer con un rating compreso tra [3.5-4.5](rating_range).
+    - Sto cercando un portatile con rating [4.2-4.8](rating_range) adatto per [editing video](usage) e dotato di [Intel Core i7 Processor](processor) e [16 GB DDR4 RAM](ram).
+    - Mi serve un laptop per [gaming](usage) con rating [4.0-5.0](rating_range), preferibilmente con [Ryzen 7](processor) e [16 GB RAM](ram).
+    - Vorrei un notebook per [lavoro e studio](usage) che abbia un rating tra [3.8-4.5](rating_range) e sia dotato di [8 GB DDR4 RAM](ram) e [256 GB SSD](storage).
+    - Cerco un laptop che abbia un rating elevato, ad esempio [4.5-5.0](rating_range), per uso [professionale](usage) con [Intel Core i9 Processor](processor) e [32 GB DDR4 RAM](ram).
+    - Mi interessa un portatile con un rating compreso tra [3.9-4.7](rating_range) e con un display da [15.6 pollici](display), adatto per [programmazione](usage).
+    - Ho bisogno di un laptop per [lavoro](usage) che abbia un rating tra [4.0-4.5](rating_range) e offra buone prestazioni, dotato di [Windows 11 Operating System](os).
+    - Cercavo un computer con rating [4.2-4.9](rating_range) per [editing fotografico](usage), con un display [OLED](display) e [512 GB SSD](storage).
+    - Vorrei un laptop per [multitasking](usage) con un rating compreso tra [4.0-4.5](rating_range), dotato di [Intel Core i5 Processor](processor) e [8 GB DDR4 RAM](ram).
+    - Sto cercando un notebook per [uso quotidiano](usage) con un rating tra [3.5-4.0](rating_range), dotato di [Intel Core i3 Processor](processor) e [256 GB SSD](storage).
+    - Cerco un portatile per [lavoro e studio](usage) con rating [4.0-4.8](rating_range), che includa [AMD Ryzen 5 Processor](processor) e [16 GB DDR4 RAM](ram).
 
 - intent: confronto_laptop
   examples: |
@@ -334,3 +367,35 @@ nlu:
     - Qual è la risoluzione dello schermo del [Asus ExpertBook B9](laptop)?
     - Puoi mostrarmi le specifiche della tastiera del [MacBook Pro 14](laptop)?
     - Quanta autonomia ha la batteria del [Lenovo Yoga 9i](laptop)?
+
+- intent: mostra_immagine
+  examples: |
+    - Mostrami l'immagine del [MacBook Air M1](laptop)
+    - Voglio vedere la foto del [Dell XPS 15](laptop)
+    - Fammi vedere l'immagine del [HP Pavilion](laptop)
+    - Mostrami la foto del [Lenovo ThinkPad](laptop)
+    - Puoi mostrarmi l'immagine del [ASUS ZenBook](laptop)?
+    - Vorrei vedere la foto del portatile [Acer Predator](laptop)
+    - Mostrami la foto del [Microsoft Surface Laptop](laptop)
+    - Mi serve vedere l'immagine del [Apple MacBook Pro](laptop)
+    - Fammi vedere l'immagine del computer [MSI Stealth](laptop)
+    - Mostrami la foto del [HP Envy](laptop)
+    - Voglio vedere l'immagine del portatile [Dell Inspiron](laptop)
+    - Mostrami la foto del [Lenovo IdeaPad](laptop)
+    - Puoi mostrarmi la foto del [Samsung Galaxy Book](laptop)?
+    - Voglio vedere l'immagine del [Razer Blade](laptop)
+    - Fammi vedere l'immagine del laptop [Asus ROG](laptop)
+    - Mostrami l'immagine di un laptop per gaming come il [Dell Alienware](laptop)
+    - Voglio vedere la foto del portatile [HP Omen](laptop)
+    - Mostrami l'immagine del nuovo [Apple MacBook M2](laptop)
+    - Fammi vedere la foto del [Asus TUF Gaming](laptop)
+    - Puoi inviarmi l'immagine del portatile [HP Spectre](laptop)?
+    - Voglio vedere la foto del laptop [Lenovo Legion](laptop)
+    - Mostrami l'immagine del [Microsoft Surface Pro](laptop)
+    - Fammi vedere la foto del laptop che ho menzionato, per favore.
+    - Voglio vedere l'immagine di un laptop adatto per il lavoro.
+    - Mostrami una foto di un portatile elegante.
+    - Puoi mostrarmi l'immagine di un buon laptop per uso quotidiano?
+    - Voglio vedere la foto di un computer portatile di alta qualità.
+    - Fammi vedere l'immagine del laptop che sto cercando.
+    - Mostrami l'immagine di un laptop adatto al gaming.

@@ -16,6 +16,7 @@ intents:
   - consiglia_laptop
   - filtra_laptop
   - dettagli_laptop
+  - mostra_immagine
 
 entities:
   - laptop
@@ -27,6 +28,9 @@ entities:
   - display
   - price_range
   - usage
+  - rating_range
+  - price_condition
+  - limit 
 
 slots:
   laptop:
@@ -98,6 +102,30 @@ slots:
     mappings:
       - type: from_entity
         entity: usage
+    
+  rating_range:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: rating_range
+
+  price_condition:          # Nuovo slot per specificare "inferiore" o "superiore"
+    type: categorical
+    values:
+      - inferiore
+      - superiore
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: price_condition
+
+  limit:                    # Nuovo slot per limitare il numero di risultati
+    type: float
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: limit
 
 responses:
   utter_saluto:
@@ -127,6 +155,8 @@ responses:
     - text: "Posso aiutarti a trovare, confrontare e fornirti dettagli sui laptop. Dimmi cosa ti interessa!"
   utter_informazioni_generali:
     - text: "Questo chatbot ti aiuta a scegliere il laptop ideale in base alle tue esigenze, filtrando per specifiche tecniche, prezzo e molto altro. Chiedimi pure cosa cerchi!"
+  utter_mostra_immagine:
+    - text: "Ecco l'immagine del laptop:"
 
 actions:
   - action_suggerisci_laptop
@@ -135,6 +165,8 @@ actions:
   - action_prezzo_laptop
   - action_help
   - action_show_laptop_list
+  - action_mostra_immagine_laptop
+  - action_reset_slots
 
 forms:
   laptop_form:

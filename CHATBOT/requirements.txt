@@ -1,0 +1,6 @@
+rasa==3.5.10
+rasa-sdk==3.5.1
+python-dotenv==1.0.0
+requests==2.31.0
+spacy==3.5.3
+sqlalchemy<2.0
