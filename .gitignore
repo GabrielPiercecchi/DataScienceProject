@@ -9,6 +9,7 @@
 [Ss]cripts
 pyvenv.cfg
 .venv
+.venv-wsl
 pip-selfcheck.json
 .lock
 share
