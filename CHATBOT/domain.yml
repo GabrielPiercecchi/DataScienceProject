@@ -17,6 +17,8 @@ intents:
   - nlu_fallback
   - affirm
   - deny
+  - provide_laptop1
+  - provide_laptop2
   - provide_price_range
   - provide_laptop
   - provide_processor

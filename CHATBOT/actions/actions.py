@@ -359,13 +359,18 @@ class ActionConfrontaLaptop(Action):
                 (matches1["storage"].str.len() <= (len(storage1) + 4))
             ]
         if matches1.empty:
-            dispatcher.utter_message(text=f"Non ho trovato alcun laptop per '{laptop1_input}' con le specifiche indicate.")
-            return []
+            dispatcher.utter_message(text=f"Non ho trovato alcun laptop per '{laptop1_input}' con le specifiche indicate. \nPer riprendere il confronto, specifica nuovamente i nomi dei due laptop.")
+            return [
+                SlotSet("laptop1", None),
+                SlotSet("processor1", None),
+                SlotSet("ram1", None),
+                SlotSet("storage1", None)
+            ]
         elif len(matches1) > 1:
             response = f"Ho trovato più laptop per '{laptop1_input}' con le specifiche fornite:\n"
             for _, row in matches1.iterrows():
                 response += f"- {row['name']} (Processor: {row.get('processor', 'N/A')}, RAM: {row.get('ram', 'N/A')}, Storage: {row.get('storage', 'N/A')})\n"
-            response += "\nPer favore, specifica meglio il primo laptop.\n Per riprendere il confronto, specifica nuovamente i nomi dei due laptop."
+            response += "\nPer favore, specifica meglio il primo laptop.\nPer riprendere il confronto, specifica nuovamente i nomi dei due laptop."
             dispatcher.utter_message(text=response)
             return [
                 SlotSet("laptop1", None),
@@ -385,13 +390,18 @@ class ActionConfrontaLaptop(Action):
                 (matches2["storage"].str.len() <= (len(storage2) + 4))
             ]
         if matches2.empty:
-            dispatcher.utter_message(text=f"Non ho trovato alcun laptop per '{laptop2_input}' con le specifiche indicate.")
-            return []
+            dispatcher.utter_message(text=f"Non ho trovato alcun laptop per '{laptop2_input}' con le specifiche indicate. \nPer riprendere il confronto, specifica nuovamente i nomi dei due laptop.")
+            return [
+                SlotSet("laptop2", None),
+                SlotSet("processor2", None),
+                SlotSet("ram2", None),
+                SlotSet("storage2", None)
+            ]
         elif len(matches2) > 1:
             response = f"Ho trovato più laptop per '{laptop2_input}' con le specifiche fornite:\n"
             for _, row in matches2.iterrows():
                 response += f"- {row['name']} (Processor: {row.get('processor', 'N/A')}, RAM: {row.get('ram', 'N/A')}, Storage: {row.get('storage', 'N/A')})\n"
-            response += "\nPer favore, specifica meglio il secondo laptop. \n Per riprendere il confronto, specifica nuovamente i nomi dei due laptop."
+            response += "\nPer favore, specifica meglio il secondo laptop. \nPer riprendere il confronto, specifica nuovamente i nomi dei due laptop."
             dispatcher.utter_message(text=response)
             return [
                 SlotSet("laptop2", None),

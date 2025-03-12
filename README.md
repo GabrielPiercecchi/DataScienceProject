@@ -15,3 +15,11 @@ Su Win 11:
     - Creato e formattato il *.env*:
       - *uv pip install rasa-plus --extra-index-url=https://europe-west3-python.pkg.dev/rasa-releases/rasa-plus-py/simple/*
   
+Su Ubuntu\WSL:
+- python3.10 -m venv ./venv-wsl
+- source .venv-wsl/bin/activate
+- spacy download it_core_news_md
+- ngrok http 5005
+- rasa run actions
+- rasa train 
+- rasa run
