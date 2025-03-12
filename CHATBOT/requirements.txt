@@ -4,3 +4,14 @@ python-dotenv==1.0.0
 requests==2.31.0
 spacy==3.5.3
 sqlalchemy<2.0
+rapidfuzz==3.12.2
+numpy
+pandas
+matplotlib
+seaborn
+plotly
+statsmodels
+scikit-learn
+tensorflow
+keras
+pycaret

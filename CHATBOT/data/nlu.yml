@@ -4,9 +4,20 @@ nlu:
 - intent: saluto
   examples: |
     - Ciao
+    - ciao
     - Salve
+    - salve
     - Buongiorno
+    - buongiono
+    - Buonasera
+    - buonasera
+    - Buon pomeriggio
+    - buon pomeriggio
+    - Buonanotte
+    - buonanotte
     - Ehi, ciao!
+    - Ehi, salve!
+    - Ciao, come va?
     - Salve, come stai?
 
 - intent: start
@@ -16,15 +27,20 @@ nlu:
     - Start
     - /START
     - /sTaRt
-    - 
+    -
 
 - intent: help
   examples: |
     - info
+    - help
+    - Help
+    - /help
+    - Aiuto
+    - aiuto
+    - /HELP
+    - /hElP
     - Ho bisogno di aiuto
     - Come funziona questo chatbot?
-    - Puoi spiegarmi cosa posso fare qui?
-    - Aiutami a trovare un laptop
 
 - intent: ringraziamento
   examples: |
@@ -32,11 +48,17 @@ nlu:
     - Ti ringrazio
     - Ottimo, grazie
     - Perfetto, grazie per l'aiuto!
+    - Grazie per l'assistenza
+    - Grazie, sei stato molto utile
 
 - intent: affirm
   examples: |
     - sì
     - si
+    - Sì, grazie
+    - Sì, perfetto
+    - Si
+    - Sì
     - certo
     - esatto
     - confermo
@@ -108,12 +130,14 @@ nlu:
     - non sono sicuro
     - mi dispiace, ma non posso
 
-- intent: addio
+- intent: goodbye
   examples: |
     - Arrivederci
     - Ciao, a presto!
     - Addio
     - Ci sentiamo presto
+    - A presto
+    - Alla prossima
 
 - intent: out_of_scope
   examples: |
@@ -129,30 +153,75 @@ nlu:
     - ???????????????????????????
     - sofoearfwefiwenriwnrienriwonreiwornewiornowe
     - nnnnnnnnnnnn
-    - non capisco
     - aijfrweoihjrtiwoehriweriowejhrewo
     - 4848783924089342083924839420839420382490382490234890
     - 7849533uieowfhjdbsh230u9erfhjuih0u9hpuewq
 
+- intent: nlu_fallback
+  examples: |
+    - ???
+    - non so
+    - non ho capito
+    - non riesco a capire
+    - non sono sicuro
+    - non sono sicuro di aver capito
+    - non ho capito cosa intendi
+
+- intent: reset_slots
+  examples: |
+    - resetta tutto
+    - azzera i dati
+    - reset
+    - cancella tutto
+    - ricomincia
+    - ricominciamo
+    - riparti
+    - ripartiamo
+    - ricominciamo da capo
+    - ricominciamo daccapo
+    - ricominciamo da zero
+    - ricominciamo dazero
+    - ricominciamo da capo per favore
+    - ricominciamo daccapo per favore
+    - ricominciamo da zero per favore
+    - ricominciamo dazero per favore
+    - azzerare
+    - azzeriamo
+    - azzeriamo tutto
+
 - intent: cerca_laptop
   examples: |
+    - Trova un laptop
+    - Cerca un portatile
+    - Trovami un notebook
+    - Trva un portatile per [gaming](usage)
+    - Cerco un laptop
+    - Voglio un portatile
+    - Sto cercando un notebook
+    - Mi serve un computer portatile
+    - Cercami un laptop
+    - Voglio un laptop per [gaming](usage)
+    - Cerco un laptop per [lavoro](usage) a un prezzo sotto [800](price_range)
+    - Cerco un computer per [lavoro](usage) a un prezzo sotto [800](price_range)
+    - Cerco un pc per [lavoro](usage) a un prezzo sotto [800](price_range)
+    - Voglio un laptop per [gaming](usage) con un budget di [1200](price_range)
+    - Cerco un portatile per [editing video](usage)
+    - Voglio un laptop per [programmazione](usage)
+    - Cerco un laptop per [uso quotidiano](usage) con prezzo inferiore a [700](price_range)
     - Cerco un laptop per [lavoro](usage) con [64 bit Windows 11 Operating System](os) e [1 TB HDD|256 GB SSD](storage) a un prezzo sotto [800](price_range) EUR [inferiore](price_condition).
     - Cerco un laptop per [lavoro](usage) con [32 bit Windows 11 Operating System](os) e [1 TB HDD|256 GB SSD](storage) a un prezzo sotto [800](price_range) EUR [inferiore](price_condition).
     - Cerco un laptop per [lavoro](usage) con [Windows 11 Operating System](os) e [1 TB HDD|256 GB SSD](storage) a un prezzo sotto [800](price_range) EUR [inferiore](price_condition).
     - Cerco un laptop per [gaming](usage) con [Intel Core i7 Processor (11th Gen)](processor) e almeno [16 GB DDR4 RAM](ram).
     - Voglio un notebook con prezzo [700](price_range) EUR [inferiore](price_condition).
     - Mi serve un portatile con prezzo [1000](price_range) EUR [superiore](price_condition) per avere più potenza.
-    - Mostrami solo [1](limit) laptop economico, sotto [500](price_range) EUR [inferiore](price_condition).
     - Cerco un laptop per [lavoro](usage) con [Windows 11 Operating System](os) e [256 GB SSD](storage) a un prezzo sotto [800](price_range) EUR [inferiore](price_condition).
     - Cerco un laptop per [gaming](usage) con [Intel Core i7 Processor (11th Gen)](processor) e almeno [16 GB DDR4 RAM](ram).
     - Vorrei un notebook con prezzo [900](price_range) EUR [inferiore](price_condition) che offra ottime prestazioni.
     - Cerco un portatile con prezzo [1200](price_range) EUR [superiore](price_condition) per attività intensive.
-    - Mostrami solo [2](limit) laptop con prezzo [500](price_range) EUR [inferiore](price_condition) e buon rapporto qualità-prezzo.
     - Desidero un laptop per [editing video](usage) con prezzo [1500](price_range) EUR [superiore](price_condition) per avere prestazioni al top.
     - Cerco un computer portatile con prezzo [600](price_range) EUR [inferiore](price_condition) e ottima durata della batteria.
     - Ho bisogno di un notebook con prezzo [800](price_range) EUR [inferiore](price_condition) per uso quotidiano.
     - Vorrei un laptop per [programmazione](usage) con prezzo [1100](price_range) EUR [superiore](price_condition) per ottenere più memoria e potenza.
-    - Mostrami solo [1](limit) notebook con prezzo [750](price_range) EUR [inferiore](price_condition) e design elegante.
     - Cerco un portatile per [lavoro](usage) con prezzo [650](price_range) EUR [inferiore](price_condition) e prestazioni affidabili.
     - Vorrei un laptop con prezzo [950](price_range) EUR [superiore](price_condition) per attività di grafica avanzata.
     - Mi serve un notebook con prezzo [550](price_range) EUR [inferiore](price_condition) per uso quotidiano, mostra solo [1](limit) risultato.
@@ -202,93 +271,38 @@ nlu:
 
 - intent: confronto_laptop
   examples: |
-    - Confronta il [Dell Inspiron](laptop1) con il [HP Pavilion](laptop2).
-    - Confronta il [Dell Inspiron](laptop1) con il [HP G8](laptop2).
-    - Confronta il [ASUS Vivobook 15](laptop1) con il [HP G8](laptop2).
-    - Confronta il [APPLE 2021 Macbook Pro](laptop1) con il [HP G8](laptop2).
-    - Confronta il [acer Extensa](laptop1) con il [HP G8](laptop2).
-    - Voglio comparare [MacBook Air](laptop1) e [ASUS VivoBook](laptop2) per prestazioni e prezzo.
+    - Confronta i due laptop
+    - Voglio confrontare due laptop
+    - Metti a confronto due laptop
+    - Confrontali
+    - Confronta il [Dell Inspiron](laptop1) con il [HP Pavilion](laptop2)
+    - Confronta il [Dell Inspiron](laptop1) con il [HP G8](laptop2)
+    - Confronta il [ASUS Vivobook 15](laptop1) con il [HP G8](laptop2)
+    - Confronta il [APPLE 2021 Macbook Pro](laptop1) con il [HP G8](laptop2)
+    - Voglio comparare [MacBook Air](laptop1) con [ASUS VivoBook](laptop2) per prestazioni e prezzo
     - Quale laptop è migliore tra [HP Spectre](laptop1) e [Asus ROG](laptop2)?
-    - Metti a confronto il [Lenovo IdeaPad](laptop1) e il [Acer Aspire](laptop2).
-    - Vorrei confrontare il [Dell XPS 15](laptop1) con il [HP Envy](laptop2) per capire quale offra una migliore qualità costruttiva.
-    - Puoi confrontare il [MacBook Pro](laptop1) e il [Microsoft Surface Laptop](laptop2) in termini di performance e autonomia?
-    - Mi interessa un confronto tra [ASUS ZenBook](laptop1) e [Lenovo ThinkPad](laptop2) per uso professionale.
-    - Confronta il [Acer Predator](laptop1) con il [MSI Gaming](laptop2) per vedere quale sia più adatto al gaming.
-    - Vorrei sapere se il [HP Omen](laptop1) è migliore del [Dell G5](laptop2) per il gaming.
-    - Confronta un laptop dotato di [Intel Core i5 Processor (11th Gen)](processor) con uno dotato di [AMD Ryzen 5 Quad Core Processor](processor) in termini di potenza e prezzo.
-    - Quale tra [ASUS ROG](laptop1) e [MSI Gaming](laptop2) offre prestazioni migliori e un display più nitido?
-    - Confronta i modelli [Dell Vostro](laptop1) e [HP 15s](laptop2) per uso quotidiano.
-    - Mi puoi mostrare un confronto tra [Lenovo Yoga](laptop1) e [Dell Inspiron 2-in-1](laptop2) per versatilità e portabilità?
-    - Voglio confrontare i laptop [Apple MacBook Air](laptop1) e [Apple MacBook Pro](laptop2) per capire le differenze di prestazioni.
-    - Confronta il [HP Spectre x360](laptop1) con il [Dell XPS 13 2-in-1](laptop2) per uso professionale e mobilità.
-    - Quale offre un miglior equilibrio tra prestazioni e autonomia: [ASUS VivoBook](laptop1) o [Acer Swift](laptop2)?
-    - Vorrei un confronto dettagliato tra il [Lenovo Legion](laptop1) e il [MSI Stealth](laptop2) per il gaming intensivo.
-    - Metti a confronto il [Dell G7](laptop1) e il [HP Omen](laptop2) per vedere quale gestisca meglio i giochi più impegnativi.
-    - Confronta un laptop dotato di [Intel Core i7 Processor (12th Gen)](processor) con uno dotato di [AMD Ryzen 9 Octa Core Processor (10th Gen)](processor) per valutare la potenza di calcolo.
-    - Confronta il [Dell Inspiron](laptop1) e il [HP Pavilion](laptop2) in termini di design, performance e autonomia.
-    - Dimmi le differenze tra [MacBook Air](laptop1) e [ASUS VivoBook](laptop2) per capire quale sia più performante per il gaming.
-
-- intent: caratteristiche_laptop
-  examples: |
-    - Dimmi le specifiche del [Lenovo V15](laptop).
-    - Quali sono le caratteristiche tecniche del [Dell Inspiron](laptop) in termini di [processor](processor), [RAM](ram) e [display](display)?
-    - Voglio conoscere il [processor](processor), la [RAM](ram) e il [display](display) del [MacBook Air](laptop).
-    - Mostrami tutti i dettagli tecnici del [ASUS TUF Gaming](laptop), inclusi [storage](storage) e [os](os).
-    - Quali sono le specifiche del laptop con [AMD Athlon Dual Core Processor](processor) e [8 GB DDR4 RAM](ram)?
-    - Raccontami le specifiche del [HP Pavilion](laptop) in termini di [processor](processor) e [RAM](ram).
-    - Vorrei conoscere le specifiche del [Acer Aspire 3](laptop) con [Intel Core i3 Processor (11th Gen)](processor) e [256 GB SSD](storage).
-    - Dimmi se il [MSI Bravo 15](laptop) è adatto per [gaming](usage) e quali sono le sue caratteristiche tecniche.
-    - Mostrami i dettagli tecnici del [Dell XPS 15](laptop) concentrandoti su [processor](processor), [RAM](ram) e [display](display).
-    - Quali sono le specifiche complete del [Apple MacBook Pro](laptop)?
-    - Voglio sapere il [processor](processor), la [RAM](ram) e il [storage](storage) del [HP Envy](laptop).
-    - Per favore, fornisci una descrizione completa del [Lenovo IdeaPad](laptop) con tutte le sue specifiche.
-    - Mostrami le caratteristiche del [ASUS ZenBook](laptop), in particolare il [processor](processor) e il [display](display).
-    - Quali sono le specifiche del [Dell Vostro](laptop) in termini di [processor](processor) e [RAM](ram)?
-    - Mi servirebbero le specifiche del [HP Omen](laptop) per capire se è adatto al [gaming](usage).
-    - Puoi dirmi i dettagli tecnici del [Acer Predator](laptop) con [Intel Core i9 Processor (12th Gen)](processor), [32 GB DDR4 RAM](ram) e [1 TB SSD](storage)?
-    - Vorrei sapere se il [MSI Stealth](laptop) è adatto per [editing video](usage) e quali sono le sue specifiche.
-    - Dimmi le caratteristiche complete del [Dell G7](laptop), inclusi [processor](processor), [RAM](ram) e [storage](storage).
-    - Quali sono i dettagli tecnici del [HP Spectre x360](laptop) in termini di [processor](processor), [RAM](ram) e [display](display)?
-    - Voglio conoscere tutte le specifiche del [ASUS VivoBook](laptop) per capire se è adatto a [lavoro e studio](usage).
-    - Fornisci le specifiche dettagliate del [Lenovo V15](laptop), inclusa la configurazione di [1 TB HDD|256 GB SSD](storage) e [8 GB DDR4 RAM](ram).
-    - Dimmi se il [Dell Inspiron](laptop) offre un buon equilibrio tra [RAM](ram) e capacità di [storage](storage).
-    - Mostrami le specifiche tecniche complete del [HP Pavilion](laptop), con particolare attenzione a [processor](processor), [RAM](ram) e alla configurazione mista di [512 GB SSD|1 TB HDD](storage).
-    - Voglio conoscere i dettagli del [MacBook Air](laptop) e verificare se la sua [RAM](ram) è adeguata al tipo di [storage](storage) utilizzato.
-    - Fornisci una descrizione completa del [ASUS ZenBook](laptop), specificando sia la quantità di [RAM](ram) che il tipo di [storage](storage) presente.
-
-- intent: prezzo_laptop
-  examples: |
-    - Quanto costa il [Dell Inspiron](laptop) in [euro](price_range)?
-    - Dimmi il prezzo del [MacBook Air](laptop).
-    - Qual è il costo del [ASUS ZenBook](laptop)?
-    - Mostrami i portatili economici, ad esempio sotto [600](price_range) EUR.
-    - Vorrei sapere il prezzo di un laptop con [15.6 pollici](display).
-    - Qual è la fascia di prezzo del [HP Pavilion](laptop)? È sotto i [1000](price_range) EUR?
-    - Puoi dirmi quanto costa il [Lenovo IdeaPad](laptop) con [Intel Core i5 Processor (11th Gen)](processor) e [8 GB DDR4 RAM](ram)?
-    - Voglio sapere il prezzo del [Acer Aspire 5](laptop) con [AMD Ryzen 7 Octa Core Processor](processor) e almeno [512 GB SSD](storage).
-    - Quanto devo spendere per un laptop con [32 GB LPDDR5 RAM](ram) e [1 TB SSD](storage)?
-    - Qual è il prezzo medio di un laptop per [gaming](usage) con [Intel Core i7 Processor (12th Gen)](processor) e [16 GB DDR5 RAM](ram)?
-    - Mostrami i laptop disponibili sotto i [500](price_range) EUR che abbiano almeno [8 GB DDR4 RAM](ram).
-    - Qual è il prezzo attuale del [Dell XPS 15](laptop) con [64 bit Windows 11 Operating System](os)?
-    - Qual è il prezzo attuale del [Dell XPS 15](laptop) con [32 bit Windows 11 Operating System](os)?
-    - Qual è il prezzo attuale del [Dell XPS 15](laptop) con [Windows 11 Operating System](os)?
-    - Vorrei un portatile per [editing video](usage): quanto costano quelli con almeno [16 GB DDR4 RAM](ram) e [512 GB SSD](storage)?
-    - Confronta il prezzo del [HP Spectre x360](laptop) e del [MacBook Pro](laptop): qual è il più costoso?
-    - Qual è il laptop più economico con [Apple M1 Processor](processor) e almeno [8 GB LPDDR4X RAM](ram)?
-    - Dimmi il prezzo di un notebook con schermo da [14 pollici](display) e un [Intel Core i3 Processor](processor).
-    - Voglio sapere il prezzo dei laptop con [AMD Ryzen 5 Hexa Core Processor](processor) e almeno [256 GB SSD](storage).
-    - Quanto costa il [MSI Stealth](laptop) con [Intel Core i9 Processor](processor) e [32 GB DDR5 RAM](ram)?
-    - Mi serve un portatile per [uso quotidiano](usage), preferibilmente sotto i [700](price_range) EUR; hai qualche opzione?
-    - Quanto costa un laptop con [Intel Core i5 Processor (12th Gen)](processor), [8 GB DDR4 RAM](ram) e almeno [512 GB SSD](storage)?
-    - Dimmi il costo di un laptop con una configurazione mista di storage, ad esempio [1 TB HDD|256 GB SSD](storage) e [8 GB DDR4 RAM](ram).
-    - Qual è il prezzo di un notebook che abbia una configurazione mista [1 TB HDD|512 GB SSD](storage) e [16 GB DDR4 RAM](ram)?
-    - Vorrei sapere quanto costa un portatile con [1 TB HDD|256 GB SSD](storage) a un budget di [800](price_range) EUR.
-    - Mi potresti dire il prezzo del [HP Pavilion](laptop) se è configurato con [1 TB HDD|256 GB SSD](storage) e [8 GB DDR4 RAM](ram)?
+    - Metti a confronto il [Lenovo IdeaPad](laptop1) e il [Acer Aspire](laptop2)
+    - Confronta il [Dell XPS 15](laptop1) con il [HP Envy](laptop2)
+    - Puoi confrontare il [MacBook Pro](laptop1) e il [Microsoft Surface Laptop](laptop2) in termini di performance?
+    - Mi interessa un confronto tra [ASUS ZenBook](laptop1) e [Lenovo ThinkPad](laptop2)
+    - Confronta il [Dell Inspiron](laptop1) con il [HP Pavilion](laptop2) con [Intel Core i5](processor1), [8GB DDR4](ram1) e [256GB SSD](storage1) rispetto a [Intel Core i7](processor2), [16GB DDR4](ram2) e [512GB SSD](storage2)
+    - Per favore, confronta il [Dell Inspiron](laptop1) dotato di [Intel Core i5](processor1), [8GB RAM](ram1) e [256GB SSD](storage1) con il [HP Pavilion](laptop2) che monta [Intel Core i7](processor2), [16GB RAM](ram2) e [512GB SSD](storage2)
+    - Voglio un confronto dettagliato tra il [Dell Inspiron](laptop1) (con [Intel Core i5](processor1), [8GB RAM](ram1), [256GB SSD](storage1)) e il [HP Pavilion](laptop2) con [Intel Core i7](processor2), [16GB RAM](ram2), [512GB SSD](storage2)
+    - Qual è il migliore: [Dell Inspiron](laptop1) con [AMD Ryzen 5](processor1), [8GB DDR4](ram1) e [256GB SSD](storage1) oppure [HP Pavilion](laptop2) con [AMD Ryzen 7](processor2), [16GB DDR4](ram2) e [1TB HDD](storage2)?
+    - Metti a confronto [Dell Inspiron](laptop1) (con [Intel Core i3](processor1), [4GB RAM](ram1) e [256GB SSD](storage1)) e [HP Pavilion](laptop2) con [Intel Core i5](processor2), [8GB RAM](ram2) e [512GB SSD](storage2) per valutare differenze in performance e autonomia
+    - Dimmi le differenze tra [Dell Inspiron](laptop1) e [HP Pavilion](laptop2) per processor, RAM e storage: il primo con [Intel Core i5](processor1), [8GB RAM](ram1), [256GB SSD](storage1) e il secondo con [Intel Core i7](processor2), [16GB RAM](ram2), [512GB SSD](storage2)
+    - Confronta [Dell Inspiron](laptop1) e [HP Pavilion](laptop2) in termini di design, prestazioni e autonomia, specificando che il primo ha [Intel Core i5](processor1), [8GB DDR4](ram1) e [256GB SSD](storage1) mentre il secondo ha [Intel Core i7](processor2), [16GB DDR4](ram2) e [512GB SSD](storage2)
 
 - intent: consiglia_laptop
   examples: |
+    - Mi consigli un laptop?
+    - Consigliami un portatile
+    - Consigliami un laptop
+    - Suggeriscimi un notebook
+    - Suggeriscimi un laptop
+    - Suggeriscimi un portatile per [gaming](usage)
     - Mi consigli un laptop per [gaming](usage)?
-    - Qual è il miglior laptop per [lavoro](usage) e [programmazione](usage)?
+    - Qual è il miglior laptop per [lavoro](usage)?
     - Consigliami un laptop [Lenovo](brand).
     - Consigliami un notebook adatto agli [studenti](usage).
     - Quale laptop mi suggerisci per [editing video](usage)?
@@ -302,25 +316,6 @@ nlu:
     - Qual è il miglior laptop per [gaming](usage) con [AMD Ryzen 9 Processor](processor) e [RTX 4070](gpu)?
     - Mi serve un computer portatile economico per [uso quotidiano](usage), con almeno [8 GB DDR4 RAM](ram), quale mi suggerisci?
     - Consigliami un laptop per [editing audio](usage), magari con una buona scheda audio integrata.
-    - Vorrei un notebook per [sviluppo software](usage) che supporti bene le macchine virtuali, hai qualche consiglio?
-    - Sto cercando un portatile per [streaming e gaming](usage), quale modello ha un buon [display](display) e una GPU potente?
-    - Qual è un buon laptop per [lavoro d'ufficio](usage) con [Windows 11 Operating System](os) e una lunga durata della batteria?
-    - Ho bisogno di un laptop per [architettura](usage) e per l'uso di software come AutoCAD; quale modello potrebbe essere adatto?
-    - Voglio un laptop 2-in-1 con touchscreen per prendere appunti e disegnare, hai qualche consiglio?
-    - Cerco un laptop con un ottimo rapporto qualità-prezzo per [studio universitario](usage), cosa mi suggerisci?
-    - Mi puoi consigliare un notebook leggero e compatto per lavorare in mobilità?
-    - Vorrei un laptop per [trading online](usage), quindi con un buon [display](display) e capacità di multitasking, hai suggerimenti?
-    - Qual è un buon laptop per [sviluppo web](usage) e design, con uno schermo ad alta risoluzione?
-    - Consigliami un laptop con [MacOS](os) per [editing video](usage) e grafica, quale modello è il migliore?
-    - Sto cercando un notebook per [gaming competitivo](usage), quindi con un refresh rate elevato e una buona GPU, hai suggerimenti?
-    - Quale laptop è ideale per [data science](usage) e per la gestione di grandi dataset?
-    - Ho bisogno di un laptop con una tastiera comoda e un buon trackpad per scrivere molto, quale modello mi consigli?
-    - Qual è un buon laptop convertibile con [Intel Core i5 Processor (11th Gen)](processor) e almeno [512 GB SSD](storage)?
-    - Vorrei un laptop per [editing fotografico](usage) con un display ad alta fedeltà cromatica, quale potrebbe essere adatto?
-    - Consigliami un portatile che abbia una configurazione mista di storage, ad esempio [1 TB HDD|256 GB SSD](storage), per uso [lavoro](usage).
-    - Mi consigli un notebook che abbia sia una buona quantità di [RAM](ram) (almeno [16 GB DDR4 RAM](ram)) che un sistema di storage efficiente, come [512 GB SSD](storage) o una configurazione mista.
-    - Quale laptop mi suggerisci per [editing video](usage) che abbia anche una capacità di archiviazione elevata, ad esempio [1 TB HDD|512 GB SSD](storage), oltre a buone specifiche hardware?
-    - Voglio un portatile per [gaming](usage) che sia leggero, con una buona [GPU](gpu) e una configurazione hardware solida, includendo ad esempio [16 GB DDR4 RAM](ram) e [256 GB SSD](storage).
 
 - intent: filtra_laptop
   examples: |
@@ -431,3 +426,510 @@ nlu:
     - Mostrami l'immagine di un laptop adatto al gaming.
     - Visualizza la foto del portatile [HP Envy](laptop).
     - Fammi vedere la foto del modello [Dell XPS 15](laptop) che ho scelto.
+
+- intent: provide_price_range
+  examples: |
+    - [800](price_range)
+    - [700](price_range)
+    - [sotto](price_condition) i [600](price_range)
+    - [sopra](price_condition) i [1200](price_range)
+    - [meno](price_condition) di [400](price_range)
+    - [1000](price_range)"
+    - [sopra](price_condition) i [600](price_range) euro
+    - [sotto](price_condition) gli [800](price_range) euro
+    - [inferiore](price_condition) a [900](price_range)
+    - [superiore](price_condition) a [1000](price_range)
+    - circa [1100](price_range) euro
+
+- intent: provide_laptop1
+  examples: |
+    - Il primo laptop è [Lenovo](laptop1)
+    - Il primo laptop è [Lenovo V15 G2](laptop1)
+    - Il primo laptop è [ASUS TUF Gaming F15](laptop1)
+    - Il primo laptop è [ASUS VivoBook 15](laptop1)
+    - Il primo laptop è [Lenovo Athlon Dual](laptop1)
+    - Il primo laptop è [APPLE 2020 Macbook Air](laptop1)
+    - Il primo laptop è [ASUS VivoBook 14](laptop1)
+    - Il primo laptop è [RedmiBook Pro](laptop1)
+    - Il primo laptop è [acer Aspire 3](laptop1)
+    - Il primo laptop è [ASUS Vivobook 14](laptop1)
+    - Il primo laptop è [ASUS Vivobook 15](laptop1)
+    - Il primo laptop è [ASUS](laptop1)
+    - Il primo laptop è [DELL Vostro](laptop1)
+    - Il primo laptop è [realme Book](laptop1)
+    - Il primo laptop è [HP 14s](laptop1)
+    - Il primo laptop è [HP](laptop1)
+    - Il primo laptop è [MSI Bravo 15](laptop1)
+    - Il primo laptop è [ASUS Zenbook Flip 14 OLED](laptop1)
+    - Il primo laptop è [HP 15s](laptop1)
+    - Il primo laptop è [Lenovo IdeaPad 3](laptop1)
+    - Il primo laptop è [HP Athlon Dual](laptop1)
+    - Il primo laptop è [ASUS VivoBook K15 OLED](laptop1)
+    - Il primo laptop è [ASUS ROG Strix G15](laptop1)
+    - Il primo laptop è [ASUS Vivobook Pro 15](laptop1)
+    - Il primo laptop è [SAMSUNG Galaxy Book Go](laptop1)
+    - Il primo laptop è [HP Pavilion](laptop1)
+    - Il primo laptop è [acer Swift 3](laptop1)
+    - Il primo laptop è [ASUS TUF Gaming F17](laptop1)
+    - Il primo laptop è [acer Extensa](laptop1)
+    - Il primo laptop è [DELL](laptop1)
+    - Il primo laptop è [ASUS Vivobook Ultra 14](laptop1)
+    - Il primo laptop è [ASUS Zenbook 14X](laptop1)
+    - Il primo laptop è [MSI Alpha 15 AMD Advantage Edition](laptop1)
+    - Il primo laptop è [acer Aspire 7](laptop1)
+    - Il primo laptop è [ASUS Chromebook](laptop1)
+    - Il primo laptop è [ASUS Chromebook Flip Touch](laptop1)
+    - Il primo laptop è [ASUS Vivobook 16X](laptop1)
+    - Il primo laptop è [Infinix X1 Slim Series](laptop1)
+    - Il primo laptop è [Lenovo IdeaPad](laptop1)
+    - Il primo laptop è [ASUS ZenBook Duo 14](laptop1)
+    - Il primo laptop è [acer Aspire 3 Dual](laptop1)
+    - Il primo laptop è [Lenovo IdeaPad 1](laptop1)
+    - Il primo laptop è [ASUS Vivobook 15 OLED](laptop1)
+    - Il primo laptop è [ASUS TUF Dash F15](laptop1)
+    - Il primo laptop è [ASUS Vivobook 15 Touch](laptop1)
+    - Il primo laptop è [HP OMEN](laptop1)
+    - Il primo laptop è [ASUS Vivobook Pro 15 OLED](laptop1)
+    - Il primo laptop è [MSI Sword 15](laptop1)
+    - Il primo laptop è [APPLE 2022 MacBook AIR](laptop1)
+    - Il primo laptop è [ASUS Vivobook S14 OLED](laptop1)
+    - Il primo laptop è [ASUS TUF Gaming A15](laptop1)
+    - Il primo laptop è [ASUS VivoBook Flip 14](laptop1)
+    - Il primo laptop è [HP Envy x360 Creator](laptop1)
+    - Il primo laptop è [ASUS TUF Gaming A17](laptop1)
+    - Il primo laptop è [Lenovo IdeaPad Gaming 3](laptop1)
+    - Il primo laptop è [APPLE MacBook Air](laptop1)
+    - Il primo laptop è [DELL Inspiron](laptop1)
+    - Il primo laptop è [acer Predator Helios 300](laptop1)
+    - Il primo laptop è [MSI](laptop1)
+    - Il primo laptop è [ASUS ROG Zephyrus G15](laptop1)
+    - Il primo laptop è [Infinix INBook X2 Plus](laptop1)
+    - Il primo laptop è [DELL G15](laptop1)
+    - Il primo laptop è [APPLE 2021 Macbook Pro](laptop1)
+    - Il primo laptop è [ASUS Touchscreen](laptop1)
+    - Il primo laptop è [HP Victus](laptop1)
+    - Il primo laptop è [ASUS Zenbook 14 OLED](laptop1)
+    - Il primo laptop è [SAMSUNG](laptop1)
+    - Il primo laptop è [HP G8](laptop1)
+    - Il primo laptop è [ASUS Vivobook K15 OLED](laptop1)
+    - Il primo laptop è [APPLE 2022 MacBook Pro](laptop1)
+    - Il primo laptop è [HP Chromebook x360](laptop1)
+    - Il primo laptop è [ASUS Vivobook Flip 14](laptop1)
+    - Il primo laptop è [ASUS ROG Strix G15 Advantage Edition](laptop1)
+    - Il primo laptop è [APPLE 2020 Macbook Pro](laptop1)
+    - Il primo laptop è [acer Nitro 5](laptop1)
+    - Il primo laptop è [MSI Katana GF66](laptop1)
+    - Il primo laptop è [ASUS ROG Strix SCAR 15](laptop1)
+    - Il primo laptop è [HP Pavilion Gaming](laptop1)
+    - Il primo laptop è [MSI Crosshair 15](laptop1)
+    - Il primo laptop è [Lenovo Legion 5](laptop1)
+    - Il primo laptop è [MSI Delta 15 AMD Advantage Edition](laptop1)
+    - Il primo laptop è [ASUS ROG Strix Scar 15](laptop1)
+    - Il primo laptop è [ALIENWARE](laptop1)
+    - Il primo laptop è [DELL Inspiron 7000](laptop1)
+    - Il primo laptop è [Lenovo Legion 5 Pro](laptop1)
+    - Il primo laptop è [SAMSUNG Galaxy Book2](laptop1)
+    - Il primo laptop è [Infinix ZERO BOOK Series Laptop](laptop1)
+    - Il primo laptop è [MSI Pulse GL66](laptop1)
+    - Il primo laptop è [Infinix INBook X1 Neo Series](laptop1)
+    - Il primo laptop è [MSI GP66 Leopard](laptop1)
+    - Il primo laptop è [acer Travelmate](laptop1)
+    - Il primo laptop è [HP Envy x360 Creator OLED](laptop1)
+    - Il primo laptop è [ASUS ROG Zephyrus](laptop1)
+    - Il primo laptop è [Lenovo Yoga Slim 7 Pro](laptop1)
+    - Il primo laptop è [DELL Inspiron 3000](laptop1)
+    - Il primo laptop è [ASUS Zenbook 13](laptop1)
+    - Il primo laptop è [Avita SATUS S111](laptop1)
+    - Il primo laptop è [HP Spectre](laptop1)
+    - Il primo laptop è [DELL Insprion 3511](laptop1)
+    - Il primo laptop è [ASUS VivoBook Ultra](laptop1)
+    - Il primo laptop è [acer Aspire 5](laptop1)
+    - Il primo laptop è [MSI GF65 Thin](laptop1)
+    - Il primo laptop è [ASUS VivoBook Gaming](laptop1)
+    - Il primo laptop è [HP Chromebook](laptop1)
+    - Il primo laptop è [Mi Notebook Horizon Edition 14](laptop1)
+    - Il primo laptop è [MSI GP65 Leopard](laptop1)
+    - Il primo laptop è [MSI Bravo](laptop1)
+    - Il primo laptop è [MSI Creator Z16](laptop1)
+    - Il primo laptop è [Lenovo IdeaPad Slim 5](laptop1)
+    - Il primo laptop è [ASUS EeeBook 12](laptop1)
+    - Il primo laptop è [APPLE MacBook Pro](laptop1)
+    - Il primo laptop è [MSI Stealth](laptop1)
+    - Il primo laptop è [acer aspire 5 gaming](laptop1)
+    - Il primo laptop è [MSI GF63 Thin](laptop1)
+    - Il primo laptop è [ASUS ZenBook 13](laptop1)
+    - Il primo laptop è [Lenovo Ideapad Slim 3i](laptop1)
+    - Il primo laptop è [ASUS ROG](laptop1)
+    - Il primo laptop è [acer](laptop1)
+    - Il primo laptop è [MSI Alpha 15](laptop1)
+    - Il primo laptop è [ASUS ExpertBook B9](laptop1)
+    - Il primo laptop è [ASUS ZenBook Classic](laptop1)
+    - Il primo laptop è [HP Envy x360](laptop1)
+    - Il primo laptop è [Lenovo Ideapad Gaming 3](laptop1)
+    - Il primo laptop è [ASUS Vivobook Flip](laptop1)
+    - Il primo laptop è [HP HP Pavilion](laptop1)
+    - Il primo laptop è [ASUS ROG Flow X13](laptop1)
+    - Il primo laptop è [Lenovo IdeaPad Gaming](laptop1)
+    - Il primo laptop è [ASUS ExpertBook P1](laptop1)
+    - Il primo laptop è [ASUS VivoBook Ultra 14](laptop1)
+    - Il primo laptop è [MSI Prestige 14](laptop1)
+    - Il primo laptop è [ASUS ZenBook Pro 15](laptop1)
+    - Il primo laptop è [HP HP Envy](laptop1)
+    - Il primo laptop è [Lenovo Ideapad AMD](laptop1)
+    - Il primo laptop è [Avita PURA APU Dual](laptop1)
+    - Il primo laptop è [ASUS ZenBook S](laptop1)
+    - Il primo laptop è [Lenovo IdeaPad 3 Dual](laptop1)
+    - Il primo laptop è [GIGABYTE G5 GD](laptop1)
+    - Il primo laptop è [acer Swift 5](laptop1)
+    - Il primo laptop è [HP 255 G8](laptop1)
+    - Il primo laptop è [ASUS VivoBook Ultra K15 OLED](laptop1)
+    - Il primo laptop è [acer Spin 7](laptop1)
+    - Il primo laptop è [MSI GL](laptop1)
+    - Il primo laptop è [Lenovo Ideapad 720S](laptop1)
+    - Il primo laptop è [MSI GP76](laptop1)
+    - Il primo laptop è [MSI GS](laptop1)
+    - Il primo laptop è [MICROSOFT Surface Laptop 3](laptop1)
+    - Il primo laptop è [DELL G7](laptop1)
+    - Il primo laptop è [Lenovo IdeaPad Flex 3 Chromebook](laptop1)
+    - Il primo laptop è [DELL Vostro 3000](laptop1)
+    - Il primo laptop è [ASUS Vivobook Gaming](laptop1)
+    - Il primo laptop è [HP 250 G8](laptop1)
+    - Il primo laptop è [DELL 7000 Series](laptop1)
+    - Il primo laptop è [RedmiBook 15](laptop1)
+    - Il primo laptop è [Lenovo Ideapad 520](laptop1)
+    - Il primo laptop è [HP Spectre x360](laptop1)
+    - Il primo laptop è [lenovo Yoga 7](laptop1)
+    - Il primo laptop è [DELL 5000](laptop1)
+    - Il primo laptop è [Lenovo B50](laptop1)
+    - Il primo laptop è [Vaio SE Series](laptop1)
+    - Il primo laptop è [MSI Modern 14](laptop1)
+    - Il primo laptop è [DELL Inspiron 3501](laptop1)
+    - Il primo laptop è [acer Aspire 5 Gaming](laptop1)
+    - Il primo laptop è [ASUS Vivobook](laptop1)
+    - Il primo laptop è [Lenovo Ideapad 330s](laptop1)
+    - Il primo laptop è [acer Nitro 5 Spin](laptop1)
+    - Il primo laptop è [DELL GAMING G5 SERIES](laptop1)
+    - Il primo laptop è [ASUS VivoBook S14](laptop1)
+    - Il primo laptop è [ASUS TUF GAMING A15](laptop1)
+    - Il primo laptop è [Nokia PureBook S14](laptop1)
+    - Il primo laptop è [Lenovo IdeaPad 3 Chromebook](laptop1)
+    - Il primo laptop è [Vaio E Series](laptop1)
+    - Il primo laptop è [Avita Liber](laptop1)
+    - Il primo laptop è [HP Chromebook MediaTek Kompanio 500](laptop1)
+
+- intent: provide_laptop2
+  examples: |
+    - Il secondo laptop è [Lenovo](laptop2)
+    - Il secondo laptop è [Lenovo V15 G2](laptop2)
+    - Il secondo laptop è [ASUS TUF Gaming F15](laptop2)
+    - Il secondo laptop è [ASUS VivoBook 15](laptop2)
+    - Il secondo laptop è [Lenovo Athlon Dual](laptop2)
+    - Il secondo laptop è [APPLE 2020 Macbook Air](laptop2)
+    - Il secondo laptop è [ASUS VivoBook 14](laptop2)
+    - Il secondo laptop è [RedmiBook Pro](laptop2)
+    - Il secondo laptop è [acer Aspire 3](laptop2)
+    - Il secondo laptop è [ASUS Vivobook 14](laptop2)
+    - Il secondo laptop è [ASUS Vivobook 15](laptop2)
+    - Il secondo laptop è [ASUS](laptop2)
+    - Il secondo laptop è [DELL Vostro](laptop2)
+    - Il secondo laptop è [realme Book](laptop2)
+    - Il secondo laptop è [HP 14s](laptop2)
+    - Il secondo laptop è [HP](laptop2)
+    - Il secondo laptop è [MSI Bravo 15](laptop2)
+    - Il secondo laptop è [ASUS Zenbook Flip 14 OLED](laptop2)
+    - Il secondo laptop è [HP 15s](laptop2)
+    - Il secondo laptop è [Lenovo IdeaPad 3](laptop2)
+    - Il secondo laptop è [HP Athlon Dual](laptop2)
+    - Il secondo laptop è [ASUS VivoBook K15 OLED](laptop2)
+    - Il secondo laptop è [ASUS ROG Strix G15](laptop2)
+    - Il secondo laptop è [ASUS Vivobook Pro 15](laptop2)
+    - Il secondo laptop è [SAMSUNG Galaxy Book Go](laptop2)
+    - Il secondo laptop è [HP Pavilion](laptop2)
+    - Il secondo laptop è [acer Swift 3](laptop2)
+    - Il secondo laptop è [ASUS TUF Gaming F17](laptop2)
+    - Il secondo laptop è [acer Extensa](laptop2)
+    - Il secondo laptop è [DELL](laptop2)
+    - Il secondo laptop è [ASUS Vivobook Ultra 14](laptop2)
+    - Il secondo laptop è [ASUS Zenbook 14X](laptop2)
+    - Il secondo laptop è [MSI Alpha 15 AMD Advantage Edition](laptop2)
+    - Il secondo laptop è [acer Aspire 7](laptop2)
+    - Il secondo laptop è [ASUS Chromebook](laptop2)
+    - Il secondo laptop è [ASUS Chromebook Flip Touch](laptop2)
+    - Il secondo laptop è [ASUS Vivobook 16X](laptop2)
+    - Il secondo laptop è [Infinix X1 Slim Series](laptop2)
+    - Il secondo laptop è [Lenovo IdeaPad](laptop2)
+    - Il secondo laptop è [ASUS ZenBook Duo 14](laptop2)
+    - Il secondo laptop è [acer Aspire 3 Dual](laptop2)
+    - Il secondo laptop è [Lenovo IdeaPad 1](laptop2)
+    - Il secondo laptop è [ASUS Vivobook 15 OLED](laptop2)
+    - Il secondo laptop è [ASUS TUF Dash F15](laptop2)
+    - Il secondo laptop è [ASUS Vivobook 15 Touch](laptop2)
+    - Il secondo laptop è [HP OMEN](laptop2)
+    - Il secondo laptop è [ASUS Vivobook Pro 15 OLED](laptop2)
+    - Il secondo laptop è [MSI Sword 15](laptop2)
+    - Il secondo laptop è [APPLE 2022 MacBook AIR](laptop2)
+    - Il secondo laptop è [ASUS Vivobook S14 OLED](laptop2)
+    - Il secondo laptop è [ASUS TUF Gaming A15](laptop2)
+    - Il secondo laptop è [ASUS VivoBook Flip 14](laptop2)
+    - Il secondo laptop è [HP Envy x360 Creator](laptop2)
+    - Il secondo laptop è [ASUS TUF Gaming A17](laptop2)
+    - Il secondo laptop è [Lenovo IdeaPad Gaming 3](laptop2)
+    - Il secondo laptop è [APPLE MacBook Air](laptop2)
+    - Il secondo laptop è [DELL Inspiron](laptop2)
+    - Il secondo laptop è [acer Predator Helios 300](laptop2)
+    - Il secondo laptop è [MSI](laptop2)
+    - Il secondo laptop è [ASUS ROG Zephyrus G15](laptop2)
+    - Il secondo laptop è [Infinix INBook X2 Plus](laptop2)
+    - Il secondo laptop è [DELL G15](laptop2)
+    - Il secondo laptop è [APPLE 2021 Macbook Pro](laptop2)
+    - Il secondo laptop è [ASUS Touchscreen](laptop2)
+    - Il secondo laptop è [HP Victus](laptop2)
+    - Il secondo laptop è [ASUS Zenbook 14 OLED](laptop2)
+    - Il secondo laptop è [SAMSUNG](laptop2)
+    - Il secondo laptop è [HP G8](laptop2)
+    - Il secondo laptop è [ASUS Vivobook K15 OLED](laptop2)
+    - Il secondo laptop è [APPLE 2022 MacBook Pro](laptop2)
+    - Il secondo laptop è [HP Chromebook x360](laptop2)
+    - Il secondo laptop è [ASUS Vivobook Flip 14](laptop2)
+    - Il secondo laptop è [ASUS ROG Strix G15 Advantage Edition](laptop2)
+    - Il secondo laptop è [APPLE 2020 Macbook Pro](laptop2)
+    - Il secondo laptop è [acer Nitro 5](laptop2)
+    - Il secondo laptop è [MSI Katana GF66](laptop2)
+    - Il secondo laptop è [ASUS ROG Strix SCAR 15](laptop2)
+    - Il secondo laptop è [HP Pavilion Gaming](laptop2)
+    - Il secondo laptop è [MSI Crosshair 15](laptop2)
+    - Il secondo laptop è [Lenovo Legion 5](laptop2)
+    - Il secondo laptop è [MSI Delta 15 AMD Advantage Edition](laptop2)
+    - Il secondo laptop è [ASUS ROG Strix Scar 15](laptop2)
+    - Il secondo laptop è [ALIENWARE](laptop2)
+    - Il secondo laptop è [DELL Inspiron 7000](laptop2)
+    - Il secondo laptop è [Lenovo Legion 5 Pro](laptop2)
+    - Il secondo laptop è [SAMSUNG Galaxy Book2](laptop2)
+    - Il secondo laptop è [Infinix ZERO BOOK Series Laptop](laptop2)
+    - Il secondo laptop è [MSI Pulse GL66](laptop2)
+    - Il secondo laptop è [Infinix INBook X1 Neo Series](laptop2)
+    - Il secondo laptop è [MSI GP66 Leopard](laptop2)
+    - Il secondo laptop è [acer Travelmate](laptop2)
+    - Il secondo laptop è [HP Envy x360 Creator OLED](laptop2)
+    - Il secondo laptop è [ASUS ROG Zephyrus](laptop2)
+    - Il secondo laptop è [Lenovo Yoga Slim 7 Pro](laptop2)
+    - Il secondo laptop è [DELL Inspiron 3000](laptop2)
+    - Il secondo laptop è [ASUS Zenbook 13](laptop2)
+    - Il secondo laptop è [Avita SATUS S111](laptop2)
+    - Il secondo laptop è [HP Spectre](laptop2)
+    - Il secondo laptop è [DELL Insprion 3511](laptop2)
+    - Il secondo laptop è [ASUS VivoBook Ultra](laptop2)
+    - Il secondo laptop è [acer Aspire 5](laptop2)
+    - Il secondo laptop è [MSI GF65 Thin](laptop2)
+    - Il secondo laptop è [ASUS VivoBook Gaming](laptop2)
+    - Il secondo laptop è [HP Chromebook](laptop2)
+    - Il secondo laptop è [Mi Notebook Horizon Edition 14](laptop2)
+    - Il secondo laptop è [MSI GP65 Leopard](laptop2)
+    - Il secondo laptop è [MSI Bravo](laptop2)
+    - Il secondo laptop è [MSI Creator Z16](laptop2)
+    - Il secondo laptop è [Lenovo IdeaPad Slim 5](laptop2)
+    - Il secondo laptop è [ASUS EeeBook 12](laptop2)
+    - Il secondo laptop è [APPLE MacBook Pro](laptop2)
+    - Il secondo laptop è [MSI Stealth](laptop2)
+    - Il secondo laptop è [acer aspire 5 gaming](laptop2)
+    - Il secondo laptop è [MSI GF63 Thin](laptop2)
+    - Il secondo laptop è [ASUS ZenBook 13](laptop2)
+    - Il secondo laptop è [Lenovo Ideapad Slim 3i](laptop2)
+    - Il secondo laptop è [ASUS ROG](laptop2)
+    - Il secondo laptop è [acer](laptop2)
+    - Il secondo laptop è [MSI Alpha 15](laptop2)
+    - Il secondo laptop è [ASUS ExpertBook B9](laptop2)
+    - Il secondo laptop è [ASUS ZenBook Classic](laptop2)
+    - Il secondo laptop è [HP Envy x360](laptop2)
+    - Il secondo laptop è [Lenovo Ideapad Gaming 3](laptop2)
+    - Il secondo laptop è [ASUS Vivobook Flip](laptop2)
+    - Il secondo laptop è [HP HP Pavilion](laptop2)
+    - Il secondo laptop è [ASUS ROG Flow X13](laptop2)
+    - Il secondo laptop è [Lenovo IdeaPad Gaming](laptop2)
+    - Il secondo laptop è [ASUS ExpertBook P1](laptop2)
+    - Il secondo laptop è [ASUS VivoBook Ultra 14](laptop2)
+    - Il secondo laptop è [MSI Prestige 14](laptop2)
+    - Il secondo laptop è [ASUS ZenBook Pro 15](laptop2)
+    - Il secondo laptop è [HP HP Envy](laptop2)
+    - Il secondo laptop è [Lenovo Ideapad AMD](laptop2)
+    - Il secondo laptop è [Avita PURA APU Dual](laptop2)
+    - Il secondo laptop è [ASUS ZenBook S](laptop2)
+    - Il secondo laptop è [Lenovo IdeaPad 3 Dual](laptop2)
+    - Il secondo laptop è [GIGABYTE G5 GD](laptop2)
+    - Il secondo laptop è [acer Swift 5](laptop2)
+    - Il secondo laptop è [HP 255 G8](laptop2)
+    - Il secondo laptop è [ASUS VivoBook Ultra K15 OLED](laptop2)
+    - Il secondo laptop è [acer Spin 7](laptop2)
+    - Il secondo laptop è [MSI GL](laptop2)
+    - Il secondo laptop è [Lenovo Ideapad 720S](laptop2)
+    - Il secondo laptop è [MSI GP76](laptop2)
+    - Il secondo laptop è [MSI GS](laptop2)
+    - Il secondo laptop è [MICROSOFT Surface Laptop 3](laptop2)
+    - Il secondo laptop è [DELL G7](laptop2)
+    - Il secondo laptop è [Lenovo IdeaPad Flex 3 Chromebook](laptop2)
+    - Il secondo laptop è [DELL Vostro 3000](laptop2)
+    - Il secondo laptop è [ASUS Vivobook Gaming](laptop2)
+    - Il secondo laptop è [HP 250 G8](laptop2)
+    - Il secondo laptop è [DELL 7000 Series](laptop2)
+    - Il secondo laptop è [RedmiBook 15](laptop2)
+    - Il secondo laptop è [Lenovo Ideapad 520](laptop2)
+    - Il secondo laptop è [HP Spectre x360](laptop2)
+    - Il secondo laptop è [lenovo Yoga 7](laptop2)
+    - Il secondo laptop è [DELL 5000](laptop2)
+    - Il secondo laptop è [Lenovo B50](laptop2)
+    - Il secondo laptop è [Vaio SE Series](laptop2)
+    - Il secondo laptop è [MSI Modern 14](laptop2)
+    - Il secondo laptop è [DELL Inspiron 3501](laptop2)
+    - Il secondo laptop è [acer Aspire 5 Gaming](laptop2)
+    - Il secondo laptop è [ASUS Vivobook](laptop2)
+    - Il secondo laptop è [Lenovo Ideapad 330s](laptop2)
+    - Il secondo laptop è [acer Nitro 5 Spin](laptop2)
+    - Il secondo laptop è [DELL GAMING G5 SERIES](laptop2)
+    - Il secondo laptop è [ASUS VivoBook S14](laptop2)
+    - Il secondo laptop è [ASUS TUF GAMING A15](laptop2)
+    - Il secondo laptop è [Nokia PureBook S14](laptop2)
+    - Il secondo laptop è [Lenovo Ideapad 3 Chromebook](laptop2)
+    - Il secondo laptop è [Vaio E Series](laptop2)
+    - Il secondo laptop è [Avita Liber](laptop2)
+    - Il secondo laptop è [HP Chromebook MediaTek Kompanio 500](laptop2)
+
+- intent: provide_processor
+  examples: |
+    - Ha processore [Intel Core i5 Processor](processor)
+    - Il processore è [Intel Core i3 Processor](processor)
+    - Dotato di [AMD Athlon Dual Core Processor](processor)
+    - Il primo laptop monta [Intel Core i7 Processor](processor)
+    - [Intel Core i5 Processor](processor)
+    - [Intel Core i3 Processor](processor)
+    - [AMD Ryzen 5 Hexa Core Processor](processor)
+    - [Intel Core i7 Processor](processor)
+    - [AMD Ryzen 7 Octa Core Processor](processor)
+    - [Intel Core i9 Processor](processor)
+    - [Apple M1 Processor](processor)
+    - [AMD Ryzen 9 Octa Core Processor](processor)
+    - [AMD Ryzen 5 Quad Core Processor](processor)
+    - [Intel Pentium Silver Processor](processor)
+    - [AMD Dual Core Processor](processor)
+    - [Apple M2 Processor](processor)
+    - [Apple M1 Max Processor](processor)
+    - [Apple M1 Pro Processor](processor)
+    - [Intel Pentium Quad Core Processor](processor)
+    - [AMD Ryzen 5 Dual Core Processor](processor)
+    - [AMD Ryzen 7 Quad Core Processor](processor)
+    - [Intel Celeron Dual Core Processor](processor)
+    - [Intel Celeron Quad Core Processor](processor)
+    - [MediaTek MediaTek Kompanio 500 Processor](processor)
+
+- intent: provide_ram
+  examples: |
+    - Con [16 GB DDR4 RAM](ram)
+    - Ha [8 GB DDR4 RAM](ram)
+    - Dotato di [4 GB DDR4 RAM](ram)
+    - [16 GB DDR4 RAM](ram)
+    - [8 GB DDR4 RAM](ram)
+    - [4 GB DDR4 RAM](ram)
+    - [32 GB DDR4 RAM](ram)
+    - [64 GB DDR4 RAM](ram)
+    - [16 GB LPDDR5 RAM](ram)
+    - [16 GB DDR5 RAM](ram)
+    - [4 GB LPDDR4X RAM](ram)
+    - [8 GB LPDDR4X RAM](ram)
+    - [32 GB DDR5 RAM](ram)
+    - [8 GB DDR5 RAM](ram)
+    - [8 GB Unified Memory RAM](ram)
+    - [32 GB Unified Memory RAM](ram)
+    - [16 GB Unified Memory RAM](ram)
+    - [32 GB DDR5 RAM](ram)
+    - [32 GB DDR4 RAM](ram)
+    - [8 GB DDR3 RAM](ram)
+    - [8 GB LPDDR3 RAM](ram)
+    - [16 GB LPDDR3 RAM](ram)
+    - [16 GB DDR3 RAM](ram)
+
+- intent: provide_storage
+  examples: |
+    - Con [512 GB SSD](storage)
+    - Ha [256 GB SSD](storage)
+    - Dotato di [1 TB SSD](storage)
+    - [512 GB SSD](storage)
+    - [256 GB SSD](storage)
+    - [1 TB SSD](storage)
+    - [2 TB SSD](storage)
+    - [512 GB HDD](storage)
+    - [1 TB HDD](storage)
+    - [2 TB HDD](storage)
+    - [1 TB HDD|256 GB SSD](storage)
+    - [2 TB HDD|512 GB SSD](storage)
+    - [512 GB SSD|1 TB HDD](storage)
+    - [1 TB SSD|2 TB HDD](storage)
+    - [2 TB SSD|1 TB HDD](storage)
+    - [1 TB HDD|512 GB SSD](storage)
+    - [256 GB SSD|1 TB HDD](storage)
+    - [1 TB SSD|512 GB HDD](storage)
+    - [512 GB SSD|2 TB HDD](storage)
+    - [1 TB HDD|2 TB SSD](storage)
+    - [1 TB SSD|2 TB HDD](storage)
+    - [2 TB SSD|1 TB HDD](storage)
+    - [1 TB HDD|512 GB SSD](storage)
+    - [256 GB SSD|1 TB HDD](storage)
+    - [1 TB SSD|512 GB HDD](storage)
+    - [1 TB HDD|256 GB SSD](storage)
+    - [2 TB HDD|512 GB SSD](storage)
+
+  # Info per il laptop da consigliare
+- intent: provide_recommend_info
+  examples: |
+    - [lavoro](usage)
+    - [gaming](usage)
+    - [programmazione](usage)
+    - [studente](usage)
+    - [800](price_range)
+    - "sotto i [600](price_range)"
+    - "meno di [1200](price_range)"
+    - "circa [1000](price_range)"
+    - [16 GB DDR4 RAM](ram)
+    - [256 GB SSD](storage)
+    - [Intel Core i7 Processor (11th Gen)](processor)
+    - [AMD Ryzen 5 Hexa Core Processor](processor)
+    - [Windows 11 Operating System](os)
+    - [15.6 pollici](display)
+    - [8 GB DDR4 RAM](ram)
+    - [512 GB SSD](storage)
+    - [32 GB LPDDR5 RAM](ram)
+    - [AMD Ryzen 7 Octa Core Processor](processor)
+    - [Intel Core i5 Processor (11th Gen)](processor)
+    - [64 bit Windows 11 Operating System](os)
+    - [1 TB HDD|256 GB SSD](storage)
+    - [4.0-5.0](rating_range)
+    - [3.5-4.5](rating_range)
+
+- intent: brand_chosen
+  examples: |
+    - Il brand scelto è [Lenovo](brand)
+    - Il brand scelto è [ASUS](brand)
+    - Il brand scelto è [APPLE](brand)
+    - Il brand scelto è [RedmiBook](brand)
+    - Il brand scelto è [acer](brand)
+    - Il brand scelto è [DELL](brand)
+    - Il brand scelto è [realme](brand)
+    - Il brand scelto è [HP](brand)
+    - Il brand scelto è [MSI](brand)
+    - Il brand scelto è [SAMSUNG](brand)
+    - Il brand scelto è [Infinix](brand)
+    - Il brand scelto è [ALIENWARE](brand)
+    - Il brand scelto è [Avita](brand)
+    - Il brand scelto è [Mi](brand)
+    - Il brand scelto è [GIGABYTE](brand)
+    - Il brand scelto è [MICROSOFT](brand)
+    - Il brand scelto è [lenovo](brand)
+    - Il brand scelto è [Vaio](brand)
+    - Il brand scelto è [Nokia](brand)
+    - Il brand che preferisco è [ASUS](brand)
+    - Il brand che preferisco è [APPLE](brand)
+    - Il brand che preferisco è [HP](brand)
+    - Il brand che preferisco è [DELL](brand)
+    - Il brand che preferisco è [MSI](brand)
+    - Il brand che voglio è [ASUS](brand)
+    - Il brand che voglio è [APPLE](brand)
+    - Il brand che voglio è [HP](brand)
+    - Il brand che voglio è [DELL](brand)

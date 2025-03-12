@@ -1,83 +1,90 @@
 version: "3.1"
 
 rules:
-- rule: Rispondi ai saluti
-  steps:
-    - intent: saluto
-    - action: utter_greet
 
-- rule: Gestisci l'inizio della conversazione
-  steps:
-    - intent: start
-    - action: utter_greet
+  - rule: Rispondi ai ringraziamenti
+    steps:
+      - intent: ringraziamento
+      - action: utter_ringraziamento
 
-- rule: Rispondi ai ringraziamenti
-  steps:
-    - intent: ringraziamento
-    - action: utter_ringraziamento
+  - rule: Gestisci l'addio
+    steps:
+      - intent: goodbye
+      - action: utter_goodbye
+      - action: action_reset_slots
 
-- rule: Gestisci l'addio
-  steps:
-    - intent: addio
-    - action: utter_addio
-    - action: action_reset_slots
+  - rule: Fornisci aiuto
+    steps:
+      - intent: help
+      - action: action_help
 
-- rule: Fornisci aiuto
-  steps:
-    - intent: help
-    - action: utter_help
+  - rule: Non ho capito
+    steps:
+      - intent: out_of_scope
+      - action: utter_out_of_scope
 
-- rule: Rispondi alle informazioni generali
-  steps:
-    - intent: informazione_generale
-    - action: utter_informazioni_generali
+  - rule: Reset degli slot su richiesta implicita
+    steps:
+      - intent: reset_slots
+      - action: utter_reset
+      - action: action_reset_slots
 
-- rule: Gestisci la richiesta di confronto laptop
-  steps:
-    - intent: confronto_laptop
-    - action: action_confronta_laptop
-    - action: action_reset_slots
+  # Flusso per la ricerca laptop (usa il form di ricerca)
+  - rule: Gestisci la ricerca di laptop
+    steps:
+      - intent: cerca_laptop
+      - action: laptop_search_form
+      - active_loop: laptop_search_form
 
-- rule: Gestisci la richiesta di caratteristiche del laptop
-  steps:
-    - intent: caratteristiche_laptop
-    - action: action_caratteristiche_laptop
-    - action: action_reset_slots
+      # L'utente compila i campi: Rasa chiede usage e price_range.
+      # Una volta che Rasa ha raccolto tutto, il form si completa automaticamente.
 
-- rule: Gestisci la richiesta di prezzo del laptop
-  steps:
-    - intent: prezzo_laptop
-    - action: action_prezzo_laptop
-    - action: action_reset_slots
+      - active_loop: null
+      - action: action_suggerisci_laptop
+      - action: action_reset_slots
+  
+  - rule: Gestisci il confronto di laptop
+    steps:
+      - intent: confronto_laptop
+      - action: laptop_compare_form
+      - active_loop: laptop_compare_form
 
-- rule: Gestisci la richiesta di consigli per il laptop
-  steps:
-    - intent: consiglia_laptop
-    - action: action_suggerisci_laptop
-    - action: action_reset_slots
+      # Una volta che Rasa avrà ottenuto tutti e 8 gli slot richiesti:
+      - active_loop: null
+      - action: action_confronta_laptop
 
-- rule: Gestisci il filtraggio dei laptop
-  steps:
-    - intent: filtra_laptop
-    - action: action_suggerisci_laptop
-    - action: action_reset_slots
+#  - rule: Gestisci consiglio di laptop
+#    steps:
+#      - intent: consiglia_laptop
+#      - action: laptop_recommend_form
+#      - active_loop: laptop_recommend_form
 
-- rule: Gestisci la richiesta di dettagli completi sul laptop
-  steps:
-    - intent: dettagli_laptop
-    - action: action_caratteristiche_laptop
-    - action: action_reset_slots
+      # Al termine di usage e price_range:
+#      - active_loop: null
+#      - action: action_consiglia_laptop
+#      - action: action_reset_slots
 
-- rule: Gestisci richiesta di mostrare immagine
-  steps:
-    - intent: mostra_immagine
-    - action: action_mostra_immagine_laptop
-    - action: action_reset_slots
+  # Flusso di dettagli laptop
+  - rule: Riempimento price_range durante laptop_search_form
+    condition:
+      # Questa rule vale solo mentre è attivo il form
+      - active_loop: laptop_search_form
+    steps:
+      - intent: provide_price_range
+      - action: laptop_search_form
 
-- rule: Gestisci richiesta con range di rating
-  condition:
-    - slot_was_set: [rating_range]
-  steps:
-    - intent: cerca_laptop
-    - action: action_suggerisci_laptop
-    - action: action_reset_slots
+  # Flusso di confronto laptop
+  - rule: Riempimento info nel laptop_compare_form
+    condition:
+      - active_loop: laptop_compare_form
+    steps:
+      - intent: provide_compare_info
+      - action: laptop_compare_form
+
+  # Flusso di dettagli laptop per il suggerimento
+  - rule: Riempimento usage/price_range in laptop_recommend_form
+    condition:
+      - active_loop: laptop_recommend_form
+    steps:
+      - intent: provide_recommend_info
+      - action: laptop_recommend_form

@@ -1,110 +1,314 @@
 version: "3.1"
 
 stories:
-- story: Saluto e ricerca laptop con form (gaming)
-  steps:
-    - intent: saluto
-    - action: utter_greet
-    - intent: cerca_laptop
-      entities:
-        - usage: gaming
-    - action: action_suggerisci_laptop
-    - action: action_reset_slots
 
-- story: Ricerca laptop per lavoro e studio con form
-  steps:
-    - intent: cerca_laptop
-      entities:
-        - usage: lavoro
-    - action: action_suggerisci_laptop
-    - action: action_reset_slots
+  - story: Avvio del bot
+    steps:
+      - intent: start
+      - action: utter_greet
+      - action: action_reset_slots
 
-- story: Ricerca laptop per editing video
-  steps:
-    - intent: cerca_laptop
-      entities:
-        - usage: editing video
-    - action: action_suggerisci_laptop
-    - action: action_reset_slots
+  - story: Reset slot al solo Saluto
+    steps:
+      - intent: saluto
+      - action: utter_greet
+      - action: action_reset_slots
 
-- story: Filtraggio dettagliato per specifiche
-  steps:
-    - intent: filtra_laptop
-    - action: action_suggerisci_laptop
-    - action: action_reset_slots
+  - story: Saluto e ricerca laptop per gaming
+    steps:
+      - intent: saluto
+      - action: utter_greet
+      - intent: cerca_laptop
+        entities:
+          - usage: gaming
+          - price_range: "1000"
+      - action: laptop_search_form
+      - active_loop: laptop_search_form
 
-- story: Confronto tra due laptop
-  steps:
-    - intent: confronto_laptop
-    - action: action_confronta_laptop
-    - action: action_reset_slots
+      - active_loop: null
+      - action: action_suggerisci_laptop
+      - action: action_reset_slots
 
-- story: Richiesta di caratteristiche tecniche
-  steps:
-    - intent: caratteristiche_laptop
-    - action: action_caratteristiche_laptop
-    - action: action_reset_slots
+  - story: Saluto e Ricerca laptop per lavoro
+    steps:
+      - intent: saluto
+      - action: utter_greet
+      - intent: cerca_laptop
+      - entities:
+          - usage: lavoro
+          - price_range: "800"
+      - action: laptop_search_form
+      - active_loop: laptop_search_form
 
-- story: Richiesta di prezzo
-  steps:
-    - intent: prezzo_laptop
-    - action: action_prezzo_laptop
-    - action: action_reset_slots
+      - active_loop: null
+      - action: action_suggerisci_laptop
+      - action: action_reset_slots
 
-- story: Richiesta di consigli per laptop
-  steps:
-    - intent: consiglia_laptop
-    - action: action_suggerisci_laptop
-    - action: action_reset_slots
+  - story: Ricerca laptop per lavoro
+    steps:
+      - intent: cerca_laptop
+        entities:
+            - usage: lavoro
+            - price_range: "800"
+      - action: laptop_search_form
+      - active_loop: laptop_search_form
+        
+      - active_loop: null
+      - action: action_suggerisci_laptop
+      - action: action_reset_slots
 
-- story: Richiesta di aiuto
-  steps:
-    - intent: help
-    - action: utter_help
+  - story: Saluto e Filtraggio dettagliato per specifiche
+    steps:
+      - intent: saluto
+      - action: utter_greet
+      - intent: filtra_laptop
+      - action: laptop_search_form
+      - active_loop: laptop_search_form
 
-- story: Saluto, ringraziamento e addio
-  steps:
-    - intent: saluto
-    - action: utter_greet
-    - intent: ringraziamento
-    - action: utter_ringraziamento
-    - intent: addio
-    - action: utter_addio
-    - action: action_reset_slots
+      # Qui il form chiede gli slot mancanti (price_range, usage, ...)
+      - active_loop: null
+      - action: action_suggerisci_laptop
+      - action: action_reset_slots
 
-- story: Mostra immagine del laptop
-  steps:
-    - intent: mostra_immagine
-    - action: action_mostra_immagine_laptop
-    - action: action_reset_slots
+  - story: Filtraggio dettagliato per specifiche
+    steps:
+      - intent: filtra_laptop
+      - action: laptop_search_form
+      - active_loop: laptop_search_form
 
-- story: Ricerca laptop con range di rating
-  steps:
-    - intent: cerca_laptop
-    - action: action_suggerisci_laptop
-    - action: action_reset_slots
+      # Qui il form chiede gli slot mancanti (price_range, usage, ...)
+      - active_loop: null
+      - action: action_suggerisci_laptop
+      - action: action_reset_slots
 
-- story: Ricerca laptop con filtro prezzo e limit
-  steps:
-    - intent: cerca_laptop
-      entities:
-        - price_range: "800"
-        - price_condition: "inferiore"
-        - limit: "1"
-    - action: action_suggerisci_laptop
-    - action: action_reset_slots
+  - story: Saluto e Confronto tra due laptop
+    steps:
+      - intent: saluto
+      - action: utter_greet
+      - intent: confronto_laptop
+      - action: laptop_compare_form
+      - active_loop: laptop_compare_form
 
-- story: Ricerca laptop per uso specifico e prezzo superiore
-  steps:
-    - intent: cerca_laptop
-      entities:
-        - usage: "lavoro"
-        - price_range: "1200"
-        - price_condition: "superiore"
-    - action: action_suggerisci_laptop
-    - action: action_reset_slots
+      # Il form chiederà i dati mancanti (ad es. processor1, ram1, ecc.)
+      - active_loop: null
+      - action: action_confronta_laptop
 
-- story: Reset degli slot (manuale)
-  steps:
-    - intent: reset_slots
-    - action: action_reset_slots
+  - story: Confronto tra due laptop
+    steps:
+      - intent: confronto_laptop
+      - action: laptop_compare_form
+      - active_loop: laptop_compare_form
+
+      # Il form chiederà i dati mancanti (ad es. processor1, ram1, ecc.)
+      - active_loop: null
+      - action: action_confronta_laptop
+
+  - story: Saluto e Consiglio di laptop
+    steps:
+      - intent: saluto
+      - action: utter_greet
+      - intent: consiglia_laptop
+      - action: laptop_recommend_form
+      - active_loop: laptop_recommend_form
+
+      # Al termine di usage e price_range:
+      - active_loop: null
+      - action: action_consiglia_laptop
+      - action: action_reset_slots
+
+  - story: Consiglio di laptop
+    steps:
+      - intent: consiglia_laptop
+      - action: laptop_recommend_form
+      - active_loop: laptop_recommend_form
+
+      # Al termine di usage e price_range:
+      - active_loop: null
+      - action: action_consiglia_laptop
+      - action: action_reset_slots
+
+  - story: Flusso di dettagli laptop
+    steps:
+      - intent: dettagli_laptop
+      - action: action_caratteristiche_laptop
+      - action: action_reset_slots
+
+  - story: Flusso per mostrare l'immagine di un laptop
+    steps:
+      - intent: mostra_immagine
+      - action: action_mostra_immagine_laptop
+      - action: action_reset_slots
+
+  # - story: Riempimento Price Range in laptop_search_form
+  #   steps:
+  #     - intent: cerca_laptop
+  #     - action: laptop_search_form
+  #     - active_loop: laptop_search_form
+  #     - intent: provide_price_range
+  #       entities:
+  #         - price_range: "800"
+  #     - action: laptop_search_form
+  #     - active_loop: null
+  #     - action: action_suggerisci_laptop
+
+  #- story: Riempimento info nel laptop_recommend_form
+  #  steps:
+  #    - intent: consiglia_laptop
+  #    - action: laptop_recommend_form
+  #    - active_loop: laptop_recommend_form
+  #    # L’utente fornisce un usage o un price_range
+  #    - intent: provide_recommend_info
+  #      entities:
+  #        - usage: "lavoro"
+  #    - action: laptop_recommend_form
+  #    - active_loop: null
+  #    - action: action_consiglia_laptop
+  #    - action: action_reset_slots
+
+  - story: Out of scope while filling laptop_search_form
+    steps:
+      - intent: cerca_laptop
+      - action: laptop_search_form
+      - active_loop: laptop_search_form
+      # Qui il bot sta chiedendo gli slot (usage, price_range, ecc.)
+
+      # L’utente dice qualcosa di fuori contesto
+      - intent: out_of_scope
+      - action: utter_out_of_scope
+      # Torna al form, che è ancora attivo, per continuare con i slot mancanti
+      - action: laptop_search_form
+      - active_loop: laptop_search_form
+
+      # Infine, quando il form ha tutti gli slot
+      - active_loop: null
+      - action: action_suggerisci_laptop
+      - action: action_reset_slots
+
+  - story: Out of scope while filling laptop_compare_form
+    steps:
+      - intent: confronto_laptop
+      - action: laptop_compare_form
+      - active_loop: laptop_compare_form
+      # Form chiede i vari campi: laptop1, processor1, ecc.
+
+      # L’utente se ne esce con qualcosa di “random”
+      - intent: out_of_scope
+      - action: utter_out_of_scope
+      # Torno al form
+      - action: laptop_compare_form
+      - active_loop: laptop_compare_form
+
+      # Una volta che la form ha tutti i dati
+      - active_loop: null
+      - action: action_confronta_laptop
+
+  - story: Out of scope while filling laptop_recommend_form
+    steps:
+      - intent: consiglia_laptop
+      - action: laptop_recommend_form
+      - active_loop: laptop_recommend_form
+      # Bot sta chiedendo usage, price_range...
+
+      - intent: out_of_scope
+      - action: utter_out_of_scope
+      # Ritorna alla form
+      - action: laptop_recommend_form
+      - active_loop: laptop_recommend_form
+
+      # Infine chiude la form
+      - active_loop: null
+      - action: action_consiglia_laptop
+      - action: action_reset_slots
+
+  - story: Saluto e Consiglio di laptop CON marca
+    steps:
+      - intent: saluto
+      - action: utter_greet
+      - intent: consiglia_laptop
+      - action: laptop_recommend_form
+      - active_loop: laptop_recommend_form
+      - active_loop: null                # Termina il form
+      - action: utter_ask_brand_option    # Chiede: "Vuoi specificare anche la marca?"
+      - intent: affirm                  # L'utente risponde "sì"
+      - action: utter_ask_brand          # Chiede: "Quale marca?"
+      - intent: provide_brand            # L'utente fornisce il brand
+        entities:
+          - brand: "Lenovo"             # Esempio; il valore verrà preso dal messaggio dell'utente
+      - action: action_consiglia_laptop
+      - action: action_reset_slots
+
+  - story: Consiglio di laptop CON marca
+    steps:
+      - intent: consiglia_laptop
+      - action: laptop_recommend_form
+      - active_loop: laptop_recommend_form
+      - active_loop: null                # Termina il form
+      - action: utter_ask_brand_option    # Chiede: "Vuoi specificare anche la marca?"
+      - intent: affirm                  # L'utente risponde "sì"
+      - action: utter_ask_brand          # Chiede: "Quale marca?"
+      - intent: provide_brand            # L'utente fornisce il brand
+        entities:
+          - brand: "Lenovo"             # Esempio; il valore verrà preso dal messaggio dell'utente
+      - action: action_consiglia_laptop
+      - action: action_reset_slots
+
+  - story: Consiglio di laptop CON marca con out_of_scope
+    steps:
+      - intent: consiglia_laptop
+      - action: laptop_recommend_form
+      - active_loop: laptop_recommend_form
+      # L’utente dice qualcosa di fuori contesto
+      - intent: out_of_scope
+      - action: utter_out_of_scope
+      - action: laptop_recommend_form
+      - active_loop: laptop_recommend_form
+      - active_loop: null                # Termina il form
+      - action: utter_ask_brand_option    # Chiede: "Vuoi specificare anche la marca?"
+      - intent: affirm                  # L'utente risponde "sì"
+      - action: utter_ask_brand          # Chiede: "Quale marca?"
+      - intent: provide_brand            # L'utente fornisce il brand
+        entities:
+          - brand: "Lenovo"             # Esempio; il valore verrà preso dal messaggio dell'utente
+      - action: action_consiglia_laptop
+      - action: action_reset_slots
+
+  - story: Saluto e Consiglio di laptop SENZA marca
+    steps:
+      - intent: saluto
+      - action: utter_greet
+      - intent: consiglia_laptop
+      - action: laptop_recommend_form
+      - active_loop: laptop_recommend_form
+      - active_loop: null                # Termina il form
+      - action: utter_ask_brand_option    # Chiede: "Vuoi specificare anche la marca?"
+      - intent: deny                    # L'utente risponde "no"
+      - action: action_consiglia_laptop
+      - action: action_reset_slots
+
+  - story: Consiglio di laptop SENZA marca
+    steps:
+      - intent: consiglia_laptop
+      - action: laptop_recommend_form
+      - active_loop: laptop_recommend_form
+      - active_loop: null                # Termina il form
+      - action: utter_ask_brand_option    # Chiede: "Vuoi specificare anche la marca?"
+      - intent: deny                    # L'utente risponde "no"
+      - action: action_consiglia_laptop
+      - action: action_reset_slots
+
+  - story: Consiglio di laptop SENZA marca con out_of_scope
+    steps:
+      - intent: consiglia_laptop
+      - action: laptop_recommend_form
+      - active_loop: laptop_recommend_form
+      # L’utente dice qualcosa di fuori contesto
+      - intent: out_of_scope
+      - action: utter_out_of_scope
+      - action: laptop_recommend_form
+      - active_loop: laptop_recommend_form
+      - active_loop: null                # Termina il form
+      - action: utter_ask_brand_option    # Chiede: "Vuoi specificare anche la marca?"
+      - intent: deny                    # L'utente risponde "no"
+      - action: action_consiglia_laptop
+      - action: action_reset_slots
+
