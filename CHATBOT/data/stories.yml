@@ -231,7 +231,7 @@ stories:
       - action: utter_ask_brand_option    # Chiede: "Vuoi specificare anche la marca?"
       - intent: affirm                  # L'utente risponde "sì"
       - action: utter_ask_brand          # Chiede: "Quale marca?"
-      - intent: provide_brand            # L'utente fornisce il brand
+      - intent: brand_chosen            # L'utente fornisce il brand
         entities:
           - brand: "Lenovo"             # Esempio; il valore verrà preso dal messaggio dell'utente
       - action: action_consiglia_laptop
@@ -246,7 +246,7 @@ stories:
       - action: utter_ask_brand_option    # Chiede: "Vuoi specificare anche la marca?"
       - intent: affirm                  # L'utente risponde "sì"
       - action: utter_ask_brand          # Chiede: "Quale marca?"
-      - intent: provide_brand            # L'utente fornisce il brand
+      - intent: brand_chosen            # L'utente fornisce il brand
         entities:
           - brand: "Lenovo"             # Esempio; il valore verrà preso dal messaggio dell'utente
       - action: action_consiglia_laptop
@@ -266,7 +266,7 @@ stories:
       - action: utter_ask_brand_option    # Chiede: "Vuoi specificare anche la marca?"
       - intent: affirm                  # L'utente risponde "sì"
       - action: utter_ask_brand          # Chiede: "Quale marca?"
-      - intent: provide_brand            # L'utente fornisce il brand
+      - intent: brand_chosen            # L'utente fornisce il brand
         entities:
           - brand: "Lenovo"             # Esempio; il valore verrà preso dal messaggio dell'utente
       - action: action_consiglia_laptop

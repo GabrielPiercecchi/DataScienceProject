@@ -74,12 +74,12 @@ rules:
       - action: laptop_search_form
 
   # Flusso di confronto laptop
-  - rule: Riempimento info nel laptop_compare_form
-    condition:
-      - active_loop: laptop_compare_form
-    steps:
-      - intent: provide_compare_info
-      - action: laptop_compare_form
+  #- rule: Riempimento info nel laptop_compare_form
+  #  condition:
+  #    - active_loop: laptop_compare_form
+  #  steps:
+  #    - intent: provide_compare_info
+  #    - action: laptop_compare_form
 
   # Flusso di dettagli laptop per il suggerimento
   - rule: Riempimento usage/price_range in laptop_recommend_form
