@@ -25,6 +25,7 @@ intents:
   - provide_ram
   - provide_storage
   - provide_recommend_info
+  - brand_chosen
 
 entities:
   - laptop
@@ -174,6 +175,7 @@ responses:
           2️⃣ Confrontare due laptop specificando, per ciascuno, nome e specifiche (processor, RAM, storage).
           3️⃣ Ricevere un consiglio sul laptop sulla fascia qualità/prezzo migliore in base alle tue esigenze di prezzo ed uso.
           4️⃣ Visualizzare l'immagine di laptop fornendo il loro nome.
+          5️⃣ Chiedere i dettagli completi di un laptop.
 
         ❓ Per aiuto, scrivi "help".
   utter_saluto:
@@ -199,6 +201,10 @@ responses:
   utter_ask_brand:
     - text: "Quale brand?"
   # Domande per il form di confronto
+  utter_ask_laptop1:
+    - text: "Qual è il nome del primo laptop?"
+  utter_ask_laptop2:
+    - text: "Qual è il nome del secondo laptop?"
   utter_ask_processor1:
     - text: "Qual è il processore del primo laptop?"
   utter_ask_ram1:

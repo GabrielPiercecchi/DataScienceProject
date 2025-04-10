@@ -6,6 +6,7 @@ from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.events import SlotSet
 from rasa_sdk import FormValidationAction
 from rasa_sdk.types import DomainDict
+import re
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
@@ -30,6 +31,53 @@ def format_laptop_details(row: pd.Series) -> str:
         f"Prezzo: {row.get('price(in EUR)', 'N/A')} EUR\n"
         f"Immagine: {row.get('img_link', 'N/A')}"
     )
+
+def get_processor_score(proc: str) -> int:
+    proc = proc.lower()
+    if "intel" in proc:
+        if "i9" in proc:
+            return 4
+        elif "i7" in proc:
+            return 3
+        elif "i5" in proc:
+            return 2
+        elif "i3" in proc:
+            return 1
+    elif "amd" in proc:
+        if "ryzen 9" in proc:
+            return 4
+        elif "ryzen 7" in proc:
+            return 3
+        elif "ryzen 5" in proc:
+            return 2
+        elif "ryzen 3" in proc:
+            return 1
+    return 0
+
+def extract_ram_value(ram_str: str) -> int:
+    # Estrae il primo numero presente (es. "8" da "8 GB DDR4 RAM")
+    match = re.search(r'(\d+)', ram_str)
+    return int(match.group(1)) if match else 0
+
+def compare_laptop_performance(row1: pd.Series, row2: pd.Series) -> str:
+    # Ottiene punteggi per processore
+    proc_score1 = get_processor_score(str(row1.get("processor", "")))
+    proc_score2 = get_processor_score(str(row2.get("processor", "")))
+    
+    # Estrae e converte la RAM in GB
+    ram_value1 = extract_ram_value(str(row1.get("ram", "")))
+    ram_value2 = extract_ram_value(str(row2.get("ram", "")))
+    
+    # Calcola un punteggio cumulativo (ponderando il processore maggiormente)
+    score1 = proc_score1 * 10 + ram_value1
+    score2 = proc_score2 * 10 + ram_value2
+    
+    if score1 > score2:
+        return f"In base ai calcoli, **{row1['name']}** sembra essere più performante di **{row2['name']}**."
+    elif score2 > score1:
+        return f"In base ai calcoli, **{row2['name']}** sembra essere più performante di **{row1['name']}**."
+    else:
+        return "I due laptop sembrano offrire prestazioni simili."
 
 # Applica filtri comuni a tutte le azioni
 def apply_common_filters(tracker: Tracker, df_input: pd.DataFrame) -> pd.DataFrame:
@@ -414,8 +462,11 @@ class ActionConfrontaLaptop(Action):
         response = (
             f"Confronto dettagliato tra **{data1['name']}** e **{data2['name']}**:\n\n"
             f"### {data1['name']}\n{format_laptop_details(data1)}\n\n"
-            f"### {data2['name']}\n{format_laptop_details(data2)}\n"
+            f"### {data2['name']}\n{format_laptop_details(data2)}\n\n"
         )
+        performance_analysis = compare_laptop_performance(data1, data2)
+        response += performance_analysis
+        
         dispatcher.utter_message(text=response)
         return [
             SlotSet(slot, None)
@@ -524,6 +575,7 @@ class ActionHelp(Action):
         return "action_help"
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict]:
         message = (
+            "👋 Benvenuto nel chatbot dei portatili!\n"
             "💻 Sono qui per aiutarti a trovare il laptop ideale!\n"
             "✨ Puoi:\n"
             "   • Cercare un laptop in base a criteri come uso e prezzo.\n"

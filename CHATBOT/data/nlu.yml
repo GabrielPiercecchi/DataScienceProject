@@ -621,6 +621,7 @@ nlu:
   examples: |
     - Il secondo laptop è [Lenovo](laptop2)
     - Il secondo laptop è [Lenovo V15 G2](laptop2)
+    - Il secondo laptop è [ASUS VivoBook 15](laptop2)
     - Il secondo laptop è [ASUS TUF Gaming F15](laptop2)
     - Il secondo laptop è [ASUS VivoBook 15](laptop2)
     - Il secondo laptop è [Lenovo Athlon Dual](laptop2)
