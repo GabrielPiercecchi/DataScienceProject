@@ -34,7 +34,14 @@ def format_laptop_details(row: pd.Series) -> str:
 
 def get_processor_score(proc: str) -> int:
     proc = proc.lower()
-    if "intel" in proc:
+    if "apple" in proc:
+        if "m1 max" in proc or "m2 max" in proc:
+            return 4
+        elif "m1 pro" in proc or "m2 pro" in proc:
+            return 3
+        elif "m1" in proc or "m2" in proc:
+            return 2
+    elif "intel" in proc:
         if "i9" in proc:
             return 4
         elif "i7" in proc:
@@ -89,7 +96,7 @@ def apply_common_filters(tracker: Tracker, df_input: pd.DataFrame) -> pd.DataFra
         df_filtered = df_filtered[df_filtered["name"].str.contains(laptop_input, case=False, na=False, regex=False)]
     
     # Filtra per altri slot espliciti (ram, processor, storage, os)
-    for slot in ["ram", "processor", "storage", "os"]:
+    for slot in ["ram1", "processor1", "storage1"]:
         value = tracker.get_slot(slot)
         if value:
             df_filtered = df_filtered[df_filtered[slot].str.contains(value, case=False, na=False, regex=False)]
@@ -519,11 +526,19 @@ class ActionCaratteristicheLaptop(Action):
             dispatcher.utter_message(text="Per favore, specifica il nome del laptop di cui vuoi conoscere i dettagli.")
             return []
         matches = df[df["name"].str.contains(laptop_input, case=False, na=False, regex=False)]
-        # Se sono forniti ulteriori filtri (ad es. processor, RAM, storage), applicali:
-        for slot in ["processor", "ram", "storage"]:
+        
+        # Mapping degli slot ai nomi delle colonne nel dataset
+        mapping = {
+            "processor1": "processor",
+            "ram1": "ram",
+            "storage1": "storage"
+        }
+        
+        for slot, column in mapping.items():
             value = tracker.get_slot(slot)
             if value:
-                matches = matches[matches[slot].str.contains(value, case=False, na=False, regex=False)]
+                matches = matches[matches[column].str.contains(value, case=False, na=False, regex=False)]
+                
         if matches.empty:
             dispatcher.utter_message(text=f"Non ho trovato dettagli per il laptop '{laptop_input}'.")
             return []

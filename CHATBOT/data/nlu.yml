@@ -355,7 +355,7 @@ nlu:
 
 - intent: dettagli_laptop
   examples: |
-    - Dammi i dettagli del [MacBook Pro](laptop).
+    - Dammi i dettagli del [APPLE 2021 Macbook Pro](laptop) con [512 GB SSD](storage) e [16 GB DDR4 RAM](ram).
     - Vorrei vedere una descrizione completa del [Dell XPS 15](laptop).
     - Mostrami tutte le informazioni tecniche del [ASUS TUF Gaming](laptop).
     - Raccontami le specifiche del [MSI Bravo 15](laptop).
@@ -820,6 +820,20 @@ nlu:
     - [Intel Celeron Dual Core Processor](processor)
     - [Intel Celeron Quad Core Processor](processor)
     - [MediaTek MediaTek Kompanio 500 Processor](processor)
+    - [Apple M1 Max Processor](processor)
+    - [Apple M1 Pro Processor](processor)
+    - [Apple M2 Pro Processor](processor)
+    - [Apple M2 Max Processor](processor)
+    - [Intel Core i5 12th Gen Processor](processor)
+    - [Intel Core i7 12th Gen Processor](processor)ù
+    - [Intel Core i9 12th Gen Processor](processor)
+    - [AMD Ryzen 5 5000 Series Processor](processor)
+    - [AMD Ryzen 7 5000 Series Processor](processor)
+    - [AMD Ryzen 9 5000 Series Processor](processor)
+    - [AMD Ryzen 5 6000 Series Processor](processor)
+    - [AMD Ryzen 7 6000 Series Processor](processor)
+    - [AMD Ryzen 9 6000 Series Processor](processor)
+    - [AMD Ryzen 5 7000 Series Processor](processor)
 
 - intent: provide_ram
   examples: |
@@ -953,3 +967,46 @@ nlu:
     - Il brand che voglio è [APPLE](brand)
     - Il brand che voglio è [HP](brand)
     - Il brand che voglio è [DELL](brand)
+
+- intent: os_chosen
+  examples: |
+    - Voglio [Windows 11](os)
+    - Voglio [Windows 10](os)
+    - Voglio [Windows 11 Home](os)
+    - Voglio [Windows 11 Pro](os)
+    - Voglio [Windows 10 Home](os)
+    - Voglio [Windows 10 Pro](os)
+    - Voglio [Linux](os)
+    - Voglio [Chrome OS](os)
+    - Voglio [macOS](os)
+    - Il sistema operativo scelto è [Windows 11](os)
+    - Il sistema operativo scelto è [Windows 10](os)
+    - Il sistema operativo scelto è [Windows 11 Home](os)
+    - Il sistema operativo scelto è [Windows 11 Pro](os)
+    - Il sistema operativo scelto è [Windows 10 Home](os)
+    - Il sistema operativo scelto è [Windows 10 Pro](os)
+    - Il sistema operativo scelto è [Linux](os)
+    - Il sistema operativo scelto è [Chrome OS](os)
+    - Il sistema operativo scelto è [macOS](os)
+    - Il sistema operativo che preferisco è [Windows 11](os)
+    - Il sistema operativo che preferisco è [Windows 10](os)
+    - Il sistema operativo che preferisco è [Windows 11 Home](os)
+    - Il sistema operativo che preferisco è [Windows 11 Pro](os)
+    - Il sistema operativo che preferisco è [Windows 10 Home](os)
+    - Il sistema operativo è 64 bit Windows 11 Operating System
+    - Il sistema operativo è 64 bit Windows 10 Operating System
+    - Il sistema operativo è 64 bit Windows 11 Home Operating System
+    - Il sistema operativo è 64 bit Windows 11 Pro Operating System
+    - Il sistema operativo è 64 bit Windows 10 Home Operating System
+    - Il sistema operativo è 64 bit Windows 10 Pro Operating System
+    - Il sistema operativo è 64 bit Linux Operating System
+    - Il sistema operativo è 64 bit Chrome OS Operating System
+    - Il sistema operativo è 64 bit macOS Operating System
+    - Il sistema operativo è DOS Operating System
+    - Il sistema operativo è Free DOS Operating System
+    - Il sistema operativo è Mac OS Operating System
+    - Il sistema operativo è Windows 11 Operating System
+    - Il sistema operativo è Windows 10 Operating System
+    - Il sistema operativo è Windows 11 Home Operating System
+    - Il sistema operativo è Windows 11 Pro Operating System
+    - Il sistema operativo è Windows 10 Home Operating System

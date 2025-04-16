@@ -118,6 +118,12 @@ slots:
     mappings:
       - type: from_entity
         entity: storage
+  os1:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: os
   # Slot per il confronto: secondo laptop
   laptop2:
     type: text
@@ -143,6 +149,12 @@ slots:
     mappings:
       - type: from_entity
         entity: storage
+  os2:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: os
 
 forms:
   laptop_search_form:
