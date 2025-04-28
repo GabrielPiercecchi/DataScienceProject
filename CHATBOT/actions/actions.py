@@ -167,7 +167,7 @@ def apply_common_filters(tracker: Tracker, df_input: pd.DataFrame) -> pd.DataFra
         except ValueError:
             logger.warning(f"Valore di rating non valido: {rating}")
 
-    os = tracker.get_slot("os")
+    os = tracker.get_slot("os1")
     if os:
         df_filtered = df_filtered[df_filtered["os"].str.contains(os, case=False, na=False, regex=False)]
 
