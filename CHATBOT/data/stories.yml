@@ -103,30 +103,6 @@ stories:
       - active_loop: null
       - action: action_confronta_laptop
 
-  - story: Saluto e Consiglio di laptop
-    steps:
-      - intent: saluto
-      - action: utter_greet
-      - intent: consiglia_laptop
-      - action: laptop_recommend_form
-      - active_loop: laptop_recommend_form
-
-      # Al termine di usage e price_range:
-      - active_loop: null
-      - action: action_consiglia_laptop
-      - action: action_reset_slots
-
-  - story: Consiglio di laptop
-    steps:
-      - intent: consiglia_laptop
-      - action: laptop_recommend_form
-      - active_loop: laptop_recommend_form
-
-      # Al termine di usage e price_range:
-      - active_loop: null
-      - action: action_consiglia_laptop
-      - action: action_reset_slots
-
   - story: Flusso di dettagli laptop
     steps:
       - intent: dettagli_laptop
@@ -138,32 +114,6 @@ stories:
       - intent: mostra_immagine
       - action: action_mostra_immagine_laptop
       - action: action_reset_slots
-
-  # - story: Riempimento Price Range in laptop_search_form
-  #   steps:
-  #     - intent: cerca_laptop
-  #     - action: laptop_search_form
-  #     - active_loop: laptop_search_form
-  #     - intent: provide_price_range
-  #       entities:
-  #         - price_range: "800"
-  #     - action: laptop_search_form
-  #     - active_loop: null
-  #     - action: action_suggerisci_laptop
-
-  #- story: Riempimento info nel laptop_recommend_form
-  #  steps:
-  #    - intent: consiglia_laptop
-  #    - action: laptop_recommend_form
-  #    - active_loop: laptop_recommend_form
-  #    # L’utente fornisce un usage o un price_range
-  #    - intent: provide_recommend_info
-  #      entities:
-  #        - usage: "lavoro"
-  #    - action: laptop_recommend_form
-  #    - active_loop: null
-  #    - action: action_consiglia_laptop
-  #    - action: action_reset_slots
 
   - story: Out of scope while filling laptop_search_form
     steps:
@@ -201,24 +151,6 @@ stories:
       # Una volta che la form ha tutti i dati
       - active_loop: null
       - action: action_confronta_laptop
-
-  - story: Out of scope while filling laptop_recommend_form
-    steps:
-      - intent: consiglia_laptop
-      - action: laptop_recommend_form
-      - active_loop: laptop_recommend_form
-      # Bot sta chiedendo usage, price_range...
-
-      - intent: out_of_scope
-      - action: utter_out_of_scope
-      # Ritorna alla form
-      - action: laptop_recommend_form
-      - active_loop: laptop_recommend_form
-
-      # Infine chiude la form
-      - active_loop: null
-      - action: action_consiglia_laptop
-      - action: action_reset_slots
 
   - story: Saluto e Consiglio di laptop CON marca
     steps:
