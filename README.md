@@ -1,34 +1,113 @@
+- [DataScienceProject](#datascienceproject)
+  - [BERT](#bert)
+    - [Code](#code)
+    - [PDF](#pdf)
+  - [CHATBOT](#chatbot)
+    - [Quick startup guide](#quick-startup-guide)
+      - [0. Clone the repository](#0-clone-the-repository)
+      - [1. Create and access virtual environment](#1-create-and-access-virtual-environment)
+      - [2. Install dependencies](#2-install-dependencies)
+      - [3. Train the model](#3-train-the-model)
+      - [4. Start the action server](#4-start-the-action-server)
+      - [5. Start the chatbot](#5-start-the-chatbot)
+    - [PDF](#pdf-1)
+  - [NLP](#nlp)
+    - [Code](#code-1)
+    - [PDF](#pdf-2)
+  - [SNA](#sna)
+    - [PDF](#pdf-3)
+  - [STCC](#stcc)
+    - [PDF](#pdf-4)
+
+
 # DataScienceProject
-Progetto di Data Science
 
-**Per il chatbot è necessario python 3.10**
+## BERT
 
-Su Win 11:
-- creare env: *python3.10 -m venv ./venv*
-- accedere all'env: *sudo .\venv\Scripts\activate*
-  - **Se non funziona apire CMD ed eseguire questo comando**: *.\\.venv\Scripts\activate.bat*
-  - Altrimenti eseguire: *Set-ExecutionPolicy Bypass -Scope Process* e poi *.\\.venv\Scripts\Activate.ps1*
-- installare rasa: 
-  - *pip install uv* 
-  - *uv pip install rasa* 
-  - **Seguire la documentazione di rasa per ottenere la chiave per Rasa Pro**
-    - Creato e formattato il *.env*:
-      - *uv pip install rasa-plus --extra-index-url=https://europe-west3-python.pkg.dev/rasa-releases/rasa-plus-py/simple/*
-  
-Su Ubuntu\WSL:
+### Code
 
-Prima Esecuzione:
-- python3.10 -m venv ./venv-wsl
-- source .venv-wsl/bin/activate
-- spacy download it_core_news_md
-- ngrok http 5005
-- rasa run actions
-- rasa train 
-- rasa run
+https://colab.research.google.com/drive/14UPvDfX4DBBMDb52A87pTw5hW5kMngMt?usp=sharing
 
-Esecuzioni Successive:
-- source .venv-wsl/bin/activate
-- ngrok http 5005
-- rasa run actions
-- rasa train 
-- rasa run
+### PDF
+
+[Bert_DS.pdf](BERT/Bert_DS.pdf)
+
+## CHATBOT
+
+### Quick startup guide
+
+> **Note:** This project uses Python 3.10.0. Rasa does not support Python 3.11 yet.
+
+#### 0. Clone the repository
+```bash
+git clone https://github.com/GabrielPiercecchi/DataScienceProject.git
+cd CHATBOT
+```
+
+#### 1. Create and access virtual environment
+```bash
+python3.10 -m venv ./venv
+source venv/bin/activate
+```
+
+#### 2. Install dependencies
+```bash
+pip install -r requirements.txt
+```
+
+Or:
+```bash
+pip3.10 install -r requirements.txt
+```
+
+Then:
+```bash
+spacy download it_core_news_md
+```
+> **Note:** The `it_core_news_md` model is used for the Italian language. 
+
+#### 3. Train the model
+```bash
+cd rasa
+rasa train
+```
+
+#### 4. Start the action server
+```bash
+cd rasa
+rasa run actions
+```
+
+#### 5. Start the chatbot
+
+In a different terminal:
+
+```bash
+rasa shell
+```
+
+### PDF
+
+[Chatbot_DS.pdf](CHATBOT/Chatbot_DS.pdf)
+
+## NLP
+
+### Code
+
+https://colab.research.google.com/drive/14UPvDfX4DBBMDb52A87pTw5hW5kMngMt?usp=sharing
+
+### PDF
+
+[NLP_DS.pdf](NLP/NLP_DS.pdf)
+
+## SNA
+
+### PDF
+
+[Social_Network_Analysis_DS.pdf](SNA/Social_Network_Analysis_DS.pdf)
+
+## STCC
+
+### PDF
+
+[Serie_temporali_DS.pdf](STCC/Serie_temporali_DS.pdf)
