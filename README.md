@@ -60,7 +60,16 @@ Or:
 pip3.10 install -r requirements.txt
 ```
 
-Then:
+Then create a `.env` file with:
+
+```bash
+RASA_PRO_LICENSE=<your_rasa_pro_license>
+TELEGRAM_ACCESS_TOKEN=<your_telegram_access_token>
+TELEGRAM_VERIFY=<your_telegram_verify>
+NGROK_URL=<your_ngrok_url>/webhooks/telegram/webhook
+```
+
+Finally:
 ```bash
 spacy download it_core_news_md
 ```
@@ -68,13 +77,11 @@ spacy download it_core_news_md
 
 #### 3. Train the model
 ```bash
-cd rasa
 rasa train
 ```
 
 #### 4. Start the action server
 ```bash
-cd rasa
 rasa run actions
 ```
 
